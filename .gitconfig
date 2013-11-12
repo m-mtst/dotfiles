@@ -1,0 +1,11 @@
+[user]
+	name = Glass_saga
+	email = glass.saga@gmail.com
+[color]
+	ui = true
+[core]
+	editor = vim
+	pager = lv -c
+	excludesfile = /home/masaki/.gitignore
+[push]
+	default = tracking
