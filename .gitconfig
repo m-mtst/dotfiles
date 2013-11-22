@@ -6,6 +6,7 @@
 [core]
 	editor = vim
 	pager = lv -c
-	excludesfile = /home/masaki/.gitignore
+	excludesfile = ~/.gitignore
+  attributesfile = ~/.gitattributes
 [push]
 	default = tracking
