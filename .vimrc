@@ -13,6 +13,7 @@ set foldmethod=marker
 set expandtab
 set mouse=a
 set wildmode=longest:full,full
+setlocal formatoptions-=ro
 colorscheme default
 au FileType c setl ts=8 sw=4 softtabstop=4 noexpandtab
 au FileType ruby setl nowrap tabstop=2 tw=0 sw=2 expandtab
