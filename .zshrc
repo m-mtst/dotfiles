@@ -49,7 +49,7 @@ function root() {
 bindkey '\e[1~' beginning-of-line #Home,Endキーを動作させる
 bindkey '\e[4~' end-of-line 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-export PATH=/sbin:$PATH:$HOME/.gem/ruby/2.1.0/bin:$HOME/ruby_trunk/bin
+export PATH=/sbin:/usr/pgsql-9.3/bin:$PATH:$HOME/.gem/ruby/2.1.0/bin:$HOME/ruby_trunk/bin
 export GEM_HOME=$HOME/.gem/ruby/2.1.0
 export RUBYLIB=$GEM_HOME
 export LANG=ja_JP.UTF8
