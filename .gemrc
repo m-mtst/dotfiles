@@ -1,4 +1,2 @@
 gem: --no-document --user-install
-:update_sources: true
-:verbose: true
 gemhome: /home/masaki/.gem/ruby/2.1.0
