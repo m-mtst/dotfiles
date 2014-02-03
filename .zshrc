@@ -18,7 +18,7 @@ setopt no_check_jobs # ジョブがあっても黙って終了する
 function chpwd() { ls --color=auto } # cdのたびにls
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=$HOME/.zsh-history # 履歴をファイルに保存する
+HISTFILE="$HOME/.zsh-history" # 履歴をファイルに保存する
 
 PROMPT="%B%(?.%F{green}.%F{red})%~%#%f%b "
 PROMPT2="%_%%"
@@ -36,7 +36,7 @@ precmd () {
 }
 RPROMPT="%1(v|%F{green}%1v%f|)"
 
-source ~/.git-flow-completion.zsh
+source "~/.git-flow-completion.zsh"
 
 # Gitのルートディレクトリへ簡単に移動できるようにする関数
 # http://qiita.com/ponko2@github/items/d5f45b2cf2326100cdbc
@@ -48,38 +48,16 @@ function root() {
 
 bindkey '\e[1~' beginning-of-line #Home,Endキーを動作させる
 bindkey '\e[4~' end-of-line 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-export PATH=/sbin:$PATH:$HOME/.gem/ruby/2.1.0/bin:$HOME/ruby_trunk/bin
-export GEM_HOME=$HOME/.gem/ruby/2.1.0
-export RUBYLIB=$GEM_HOME
-export LANG=ja_JP.UTF8
-export LC_ALL=$LANG
-export LANGUAGE=$LANG
-export JRUBY_OPTS="--1.9"
-export EDITOR="vim"
-alias h="history"
-alias j="jobs -l"
-alias q="exit"
-alias r="ruby"
 alias tmux="tmux -2 -u"
 alias tl="tmux ls"
 alias tn="tmux new -s"
 alias ta="tmux a -t"
 alias tk="tmux kill-session -t"
-#alias "which"="type -a"
-alias pd="popd"
-alias apt-get="sudo apt-get"
-alias as="apt-cache search"
-alias ai="apt-get install"
-alias ar="apt-get autoremove"
-alias au="apt-get update && apt-get dist-upgrade && ar"
 alias jbundle="jruby -S bundle"
-alias top="htop"
 alias vim="vim -p"
 alias vi="vim"
 alias ls="ls --color=auto"
 alias lhl="ls -h -l"
-alias ll="ls -l"
 alias df="df -h"
 alias gs="git status"
 alias gc="git checkout"
@@ -93,10 +71,26 @@ alias gr="git remote -v"
 alias gf="git flow"
 alias rm="rm -i"
 alias mv="mv -i"
-alias gpg="gpg2"
 alias -s txt=cat
 alias -s rb=ruby
 alias -s pl=perl
 alias -s sh=bash
-alias -s git="git clone"
+
+
+if which apt-get > /dev/null 2>&1; then
+  alias apt-get="sudo apt-get"
+  alias as="apt-cache search"
+  alias ai="apt-get install"
+  alias ar="apt-get autoremove"
+  alias au="apt-get update && apt-get dist-upgrade && ar"
+fi
+
+if which htop > /dev/null 2>&1; then
+  alias top="htop"
+fi
+
+if which gpg > /dev/null 2>&1; then
+  alias gpg="gpg2"
+fi
+
 ls
