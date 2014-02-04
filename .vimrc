@@ -203,3 +203,5 @@ endif
 filetype plugin indent on
 
 let g:syntastic_mode_map = { 'passive_filetypes': ['c'] }
+
+let g:neocomplcache_force_overwrite_completefunc=1 " vim-railsの補完を上書き
