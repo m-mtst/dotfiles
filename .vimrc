@@ -1,5 +1,6 @@
 set nocompatible
 "set number
+set clipboard=unnamed " 無名レジスタの内容をクリップボードに書き込む
 set includeexpr=''
 set pastetoggle=<F12>
 set autoindent
@@ -38,7 +39,8 @@ nnoremap :te :tabedit
 nnoremap :to :tabonly<CR>
 
 " 常に0レジスタからコピー(削除による無名レジスタ上書きの影響を受けなくなる)
-nnoremap p "0p
+" インデント考慮付き
+nnoremap p "0]p
 
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]>
