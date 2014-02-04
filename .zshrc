@@ -3,17 +3,13 @@ colors
 autoload -U compinit
 compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # 補完時に大文字小文字を区別しない
-
 setopt listpacked #補完リストを詰めて表示
 setopt hist_ignore_all_dups # 既にヒストリにあるコマンド行は古い方を削除
-#setopt share_history # 履歴の共有
-
 setopt auto_cd # cd入力いらず
 setopt auto_pushd # ディレクトリの一覧表示
 setopt nolistbeep # 補完時にbeepしない
 setopt nonomatch
 setopt print_exit_value # 戻り値が0以外の場合終了コードを表示
-setopt no_check_jobs # ジョブがあっても黙って終了する
 
 function chpwd() { ls --color=auto } # cdのたびにls
 HISTSIZE=1000
@@ -35,8 +31,6 @@ precmd () {
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 RPROMPT="%1(v|%F{green}%1v%f|)"
-
-source "~/.git-flow-completion.zsh"
 
 # Gitのルートディレクトリへ簡単に移動できるようにする関数
 # http://qiita.com/ponko2@github/items/d5f45b2cf2326100cdbc
@@ -76,7 +70,6 @@ alias -s rb=ruby
 alias -s pl=perl
 alias -s sh=bash
 
-
 if which apt-get > /dev/null 2>&1; then
   alias apt-get="sudo apt-get"
   alias as="apt-cache search"
@@ -91,6 +84,10 @@ fi
 
 if which gpg > /dev/null 2>&1; then
   alias gpg="gpg2"
+fi
+
+if which git flow > /dev/null 2>&1; then
+  source "~/.git-flow-completion.zsh"
 fi
 
 ls
