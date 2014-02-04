@@ -1,5 +1,5 @@
 set nocompatible
-"set number
+"set number " 行番号表示
 set clipboard=unnamed " 無名レジスタの内容をクリップボードに書き込む
 set includeexpr=''
 set pastetoggle=<F12>
@@ -41,7 +41,7 @@ nnoremap s :Switch<CR>
 
 " 常に0レジスタからコピー(削除による無名レジスタ上書きの影響を受けなくなる)
 " インデント考慮付き
-nnoremap p "0]p
+"nnoremap p "0]p
 
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]>
@@ -128,18 +128,6 @@ augroup CRuby
   autocmd BufWinEnter,BufNewFile *.{c,cc,cpp,h,hh,hpp} call s:CRuby_ext_setup()
 augroup END
 
-let g:changelog_timeformat = "%a %b %e %T %Y"
-let g:changelog_username = "Masaki Matsushita  <glass.saga@gmail.com>"
-
-" neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_quick_match = 0
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:NeoComplCache_enable_info = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_manual_completion_start_length = 2
-
 " 検索結果のハイライトをさりげなく消す
 " http://d.hatena.ne.jp/viver/20070612/p1
 set hlsearch
@@ -204,4 +192,15 @@ filetype plugin indent on
 
 let g:syntastic_mode_map = { 'passive_filetypes': ['c'] }
 
+let g:changelog_timeformat = "%a %b %e %T %Y"
+let g:changelog_username = "Masaki Matsushita  <glass.saga@gmail.com>"
+
+" neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_quick_match = 0
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:NeoComplCache_enable_info = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_manual_completion_start_length = 2
 let g:neocomplcache_force_overwrite_completefunc=1 " vim-railsの補完を上書き

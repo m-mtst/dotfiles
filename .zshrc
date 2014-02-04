@@ -17,9 +17,9 @@ setopt magic_equal_subst # =以降も補完する(--prefix=/usrなど)
 setopt extended_history   # ヒストリに実行時間も保存する
 
 function chpwd() { ls --color=auto } # cdのたびにls
+
 HISTSIZE=100
 SAVEHIST=100
-HISTFILE=$HOME/.zsh-history # 履歴をファイルに保存する
 
 PROMPT="%B%(?.%F{green}.%F{red})%~%#%f%b "
 PROMPT2="%_%%"
@@ -36,14 +36,6 @@ precmd () {
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 RPROMPT="%1(v|%F{green}%1v%f|)"
-
-# Gitのルートディレクトリへ簡単に移動できるようにする関数
-# http://qiita.com/ponko2@github/items/d5f45b2cf2326100cdbc
-function root() {
-  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-    cd `pwd`/`git rev-parse --show-cdup`
-  fi
-}
 
 bindkey '\e[1~' beginning-of-line #Home,Endキーを動作させる
 bindkey '\e[4~' end-of-line 
@@ -96,5 +88,13 @@ fi
 if which git flow > /dev/null 2>&1; then
   source ~/.git-flow-completion.zsh
 fi
+
+# Gitのルートディレクトリへ簡単に移動できるようにする関数
+# http://qiita.com/ponko2@github/items/d5f45b2cf2326100cdbc
+function root() {
+  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    cd `pwd`/`git rev-parse --show-cdup`
+  fi
+}
 
 ls
