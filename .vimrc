@@ -31,12 +31,13 @@ syntax enable
 highlight Pmenu ctermbg=4
 highlight PmenuSel ctermbg=1
 highlight PMenuSbar ctermbg=4
-noremap <Home> ^
 noremap <Tab><Right> :tabnext<CR>
 noremap <Tab><Left> :tabprevious<CR>
+nnoremap <Home> ^
 nnoremap :tn :tabnew<CR>
 nnoremap :te :tabedit
 nnoremap :to :tabonly<CR>
+nnoremap s :Switch<CR>
 
 " 常に0レジスタからコピー(削除による無名レジスタ上書きの影響を受けなくなる)
 " インデント考慮付き
@@ -190,6 +191,9 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'elzr/vim-json'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'alpaca-tc/alpaca_tags'
+NeoBundle 'AndrewRadev/switch.vim'
 
 if neobundle#exists_not_installed_bundles()
    echomsg 'Not installed bundles : ' .
