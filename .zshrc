@@ -19,7 +19,7 @@ setopt extended_history   # ヒストリに実行時間も保存する
 function chpwd() { ls --color=auto } # cdのたびにls
 HISTSIZE=100
 SAVEHIST=100
-HISTFILE="$HOME/.zsh-history" # 履歴をファイルに保存する
+HISTFILE=$HOME/.zsh-history # 履歴をファイルに保存する
 
 PROMPT="%B%(?.%F{green}.%F{red})%~%#%f%b "
 PROMPT2="%_%%"
@@ -94,7 +94,7 @@ if which gpg > /dev/null 2>&1; then
 fi
 
 if which git flow > /dev/null 2>&1; then
-  source "~/.git-flow-completion.zsh"
+  source ~/.git-flow-completion.zsh
 fi
 
 ls
