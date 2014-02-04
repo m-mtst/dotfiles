@@ -37,6 +37,9 @@ nnoremap :tn :tabnew<CR>
 nnoremap :te :tabedit
 nnoremap :to :tabonly<CR>
 
+" 常に0レジスタからコピー(削除による無名レジスタ上書きの影響を受けなくなる)
+nnoremap p "0p
+
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]>
 
