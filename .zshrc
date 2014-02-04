@@ -3,6 +3,7 @@ colors
 autoload -U compinit
 compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # 補完時に大文字小文字を区別しない
+zstyle ':completion:*:default' menu select=1 # 補完候補を矢印キーで選択
 setopt listpacked #補完リストを詰めて表示
 setopt hist_ignore_all_dups # 既にヒストリにあるコマンド行は古い方を削除
 setopt auto_cd # cd入力いらず
@@ -12,10 +13,12 @@ setopt nonomatch
 setopt print_exit_value # 戻り値が0以外の場合終了コードを表示
 setopt auto_param_slash # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
 setopt list_types # 補完候補一覧でファイルの種別を識別マーク表示 (訳注:ls -F の記号)
+setopt magic_equal_subst # =以降も補完する(--prefix=/usrなど)
+setopt extended_history   # ヒストリに実行時間も保存する
 
 function chpwd() { ls --color=auto } # cdのたびにls
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=100
+SAVEHIST=100
 HISTFILE="$HOME/.zsh-history" # 履歴をファイルに保存する
 
 PROMPT="%B%(?.%F{green}.%F{red})%~%#%f%b "
