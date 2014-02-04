@@ -10,6 +10,8 @@ setopt auto_pushd # ディレクトリの一覧表示
 setopt nolistbeep # 補完時にbeepしない
 setopt nonomatch
 setopt print_exit_value # 戻り値が0以外の場合終了コードを表示
+setopt auto_param_slash # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
+setopt list_types # 補完候補一覧でファイルの種別を識別マーク表示 (訳注:ls -F の記号)
 
 function chpwd() { ls --color=auto } # cdのたびにls
 HISTSIZE=1000
@@ -50,7 +52,7 @@ alias tk="tmux kill-session -t"
 alias jbundle="jruby -S bundle"
 alias vim="vim -p"
 alias vi="vim"
-alias ls="ls --color=auto"
+alias ls="ls --classify --color=auto"
 alias lhl="ls -h -l"
 alias df="df -h"
 alias gs="git status"
@@ -63,6 +65,7 @@ alias gl="git log"
 alias gp="git pull --rebase"
 alias gr="git remote -v"
 alias gf="git flow"
+alias cp="cp -i"
 alias rm="rm -i"
 alias mv="mv -i"
 alias -s txt=cat
