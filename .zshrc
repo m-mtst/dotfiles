@@ -10,8 +10,10 @@ setopt auto_cd # cd入力いらず
 setopt auto_pushd # ディレクトリの一覧表示
 setopt nolistbeep # 補完時にbeepしない
 setopt nonomatch
+setopt correct
 setopt print_exit_value # 戻り値が0以外の場合終了コードを表示
 setopt auto_param_slash # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
+setopt auto_param_keys # カッコの対応などを自動的に補完
 setopt list_types # 補完候補一覧でファイルの種別を識別マーク表示 (訳注:ls -F の記号)
 setopt magic_equal_subst # =以降も補完する(--prefix=/usrなど)
 setopt extended_history   # ヒストリに実行時間も保存する
@@ -71,11 +73,10 @@ alias -s pl=perl
 alias -s sh=bash
 
 if which apt-get > /dev/null 2>&1; then
-  alias apt-get="sudo apt-get"
   alias as="apt-cache search"
-  alias ai="apt-get install"
-  alias ar="apt-get autoremove"
-  alias au="apt-get update && apt-get dist-upgrade && ar"
+  alias ai="sudo apt-get install"
+  alias ar="sudo apt-get autoremove"
+  alias au="sudo apt-get update && sudo apt-get dist-upgrade && ar"
 fi
 
 if which htop > /dev/null 2>&1; then
