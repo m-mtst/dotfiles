@@ -169,6 +169,21 @@ function! s:vimfiler_my_settings()
   nmap <buffer> q <Plug>(vimfiler_exit)
 endfunction
 
+" Bracketed Paste Modeを有効にする
+" http://ttssh2.sourceforge.jp/manual/ja/usage/tips/vim.html
+if &term =~ "xterm"
+    let &t_SI .= "\e[?2004h"
+    let &t_EI .= "\e[?2004l"
+    let &pastetoggle = "\e[201~"
+
+    function XTermPasteBegin(ret)
+        set paste
+        return a:ret
+    endfunction
+
+    inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+endif
+
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neosnippet.vim'
