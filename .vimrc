@@ -157,6 +157,17 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/bundle/'))
 endif
 
+" Checking typo.
+" http://d.hatena.ne.jp/tyru/20130419/avoid_tyop （一部修正）
+autocmd BufWriteCmd 2,*[,*] call s:write_check_typo(expand('<afile>'))
+function! s:write_check_typo(file)
+    let prompt = "possible typo: really want to write to '" . a:file . "'?(y/n):"
+    let input = input(prompt)
+    if input =~? '^y\(es\)\=$'
+        execute 'write'.(v:cmdbang ? '!' : '') a:file
+    endif
+endfunction
+
 " vimfiler
 " Edit file by tabedit.
 " http://lsifrontend.blog100.fc2.com/blog-entry-343.html
