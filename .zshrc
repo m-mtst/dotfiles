@@ -100,4 +100,9 @@ function root() {
   fi
 }
 
+# whoisの文字化け回避
+function whois() {
+  jwhois $* | iconv -f ISO-2022-JP -t UTF-8
+}
+
 ls
