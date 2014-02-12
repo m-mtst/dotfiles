@@ -41,6 +41,9 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 
 bindkey '\e[1~' beginning-of-line #Home,Endキーを動作させる
 bindkey '\e[4~' end-of-line 
+alias cp="cp -i"
+alias rm="rm -i"
+alias mv="mv -i"
 alias tmux="tmux -2 -u"
 alias tl="tmux ls"
 alias tn="tmux new -s"
@@ -64,13 +67,11 @@ alias gl="git log"
 alias gp="git pull --rebase"
 alias gr="git remote -v"
 alias gf="git flow"
-alias cp="cp -i"
-alias rm="rm -i"
-alias mv="mv -i"
+alias be="bundle exec"
 alias -s txt=cat
 alias -s rb=ruby
 alias -s pl=perl
-alias -s sh=bash
+alias -s ym=vim
 
 if which apt-get > /dev/null 2>&1; then
   alias as="apt-cache search"
