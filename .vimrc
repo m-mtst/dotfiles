@@ -208,6 +208,7 @@ NeoBundle 'elzr/vim-json'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'alpaca-tc/alpaca_tags'
 NeoBundle 'AndrewRadev/switch.vim'
+NeoBundle 'akuraiyuta/commentout.vim'
 
 if neobundle#exists_not_installed_bundles()
    echomsg 'Not installed bundles : ' .
