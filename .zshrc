@@ -18,7 +18,7 @@ setopt list_types # 補完候補一覧でファイルの種別を識別マーク
 setopt magic_equal_subst # =以降も補完する(--prefix=/usrなど)
 setopt extended_history   # ヒストリに実行時間も保存する
 
-function chpwd() { ls --color=auto } # cdのたびにls
+function chpwd() { ls --classify --color=auto } # cdのたびにls
 
 HISTSIZE=100
 SAVEHIST=100
