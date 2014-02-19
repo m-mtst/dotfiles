@@ -8,7 +8,7 @@ export JRUBY_OPTS="--1.9"
 export EDITOR="vim"
 
 path=(
-  $path
   $HOME/.gem/ruby/2.1.0/bin(N-/)
+  $path
   $HOME/ruby_trunk/bin(N-/)
 )
