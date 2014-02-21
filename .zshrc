@@ -105,4 +105,17 @@ function whois() {
   jwhois $* | iconv -f ISO-2022-JP -t UTF-8
 }
 
+# crontabの-eを禁止, -rは確認を強制
+function crontab() {
+  if [ $1 = -e ]; then
+    echo "\"crontab -e\" is dangerous and strictly prohibited."
+    echo "Use \"crontab file\"."
+    return 1
+  elif [ $1 = -r ]; then
+    command crontab -ri
+  else
+    command crontab $@
+  fi
+}
+
 ls
