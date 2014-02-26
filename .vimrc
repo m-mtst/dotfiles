@@ -4,16 +4,28 @@ set clipboard=unnamed,autoselect " 無名レジスタの内容をクリップボ
 set includeexpr=''
 set pastetoggle=<F12>
 set autoindent
+set smartindent  " 新しい行を開始したときに、新しい行のインデントを現在行と同じ量にする。
 set tabstop=2
 set shiftwidth=2
-set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 set ruler
 set ambiwidth=double
 set foldmethod=marker
 set expandtab
 set mouse=a
+set guioptions+=a
+set ttymouse=xterm2
 set wildmode=longest:full,full
+set backspace=indent,eol,start   " バックスペースでなんでも消せるように
+set nobackup                     " バックアップ取らない
+set autoread                     " 他で書き換えられたら自動で読み直す
+set noswapfile                   " スワップファイル作らない
+set showcmd                      " コマンドをステータス行に表示
+set cursorline                   " カーソル行をハイライト
+set ttyfast                      " 高速ターミナル接続を行う
+set t_Co=256                     " 256色
+set wildmenu                     " コマンド補完を強化
+set laststatus=2                 " 常にステータスラインを表示
 setlocal formatoptions-=ro
 colorscheme default
 au FileType c setl ts=8 sw=4 softtabstop=4 noexpandtab
@@ -38,13 +50,14 @@ nnoremap :tn :tabnew<CR>
 nnoremap :te :tabedit
 nnoremap :to :tabonly<CR>
 nnoremap s :Switch<CR>
-
-" 常に0レジスタからコピー(削除による無名レジスタ上書きの影響を受けなくなる)
-" インデント考慮付き
-"nnoremap p "0]p
-
 " tagsジャンプの時に複数ある時は一覧表示
-nnoremap <C-]> g<C-]>
+nnoremap <C-]> g<C-]> 
+" コンマの後に自動的にスペースを挿入
+inoremap , ,<Space>
+
+" 全角スペースの表示
+highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+match ZenkakuSpace /　/
 
 " 外部で変更のあったファイルを自動的に読み直す http://vim-users.jp/2011/03/hack206/
 augroup vimrc-checktime

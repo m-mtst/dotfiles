@@ -17,6 +17,7 @@ setopt auto_param_keys # カッコの対応などを自動的に補完
 setopt list_types # 補完候補一覧でファイルの種別を識別マーク表示 (訳注:ls -F の記号)
 setopt magic_equal_subst # =以降も補完する(--prefix=/usrなど)
 setopt extended_history   # ヒストリに実行時間も保存する
+setopt rm_star_wait # 10 秒間反応しなくなり、頭を冷ます時間が与えられる
 
 function chpwd() { ls --classify --color=auto } # cdのたびにls
 
@@ -44,6 +45,7 @@ bindkey '\e[4~' end-of-line
 alias cp="cp -i"
 alias rm="rm -i"
 alias mv="mv -i"
+alias grep="grep --color=auto -EIn --exclude='tags'"
 alias tmux="tmux -2 -u"
 alias tl="tmux ls"
 alias tn="tmux new -s"
@@ -71,7 +73,12 @@ alias be="bundle exec"
 alias -s txt=cat
 alias -s rb=ruby
 alias -s pl=perl
-alias -s ym=vim
+alias -s yml=vim
+alias -s git=git
+
+if which pygmentize > /dev/null 2>&1; then
+  alias ccat='pygmentize -O style=vim -f console256 -g' # colorized cat
+fi
 
 if which apt-get > /dev/null 2>&1; then
   alias as="apt-cache search"
