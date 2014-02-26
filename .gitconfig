@@ -1,6 +1,7 @@
 [user]
 	name = Glass_saga
 	email = glass.saga@gmail.com
+	signingkey = 94F1F2D8
 [color]
 	ui = true
 [core]
@@ -8,8 +9,12 @@
 	pager = lv -c
 	excludesfile = ~/.gitignore
   attributesfile = ~/.gitattributes
+	autocrlf = input
+	whitespace = trailing-space,space-before-tab
 [push]
 	default = tracking
 [alias]
   reamend = commit --amend -C HEAD
   wdiff   = diff --word-diff
+	apply = apply --whitespace=warn
+	rebase = rebase --whitespace=warn

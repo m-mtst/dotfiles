@@ -15,7 +15,9 @@ set expandtab
 set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
-set wildmode=longest:full,full
+set fileformats=unix,dos,mac     " 改行コードの自動認識
+set ignorecase                   " 検索時に大文字小文字を区別しない
+set smartcase                    " 検索パターンに大文字が含まれる場合だけ大文字小文字を区別する
 set backspace=indent,eol,start   " バックスペースでなんでも消せるように
 set nobackup                     " バックアップ取らない
 set autoread                     " 他で書き換えられたら自動で読み直す
@@ -23,9 +25,15 @@ set noswapfile                   " スワップファイル作らない
 set showcmd                      " コマンドをステータス行に表示
 set cursorline                   " カーソル行をハイライト
 set ttyfast                      " 高速ターミナル接続を行う
+set laststatus=2                 " 常にステータスラインを表示
+set statusline=%F\ %y[%{&fileencoding}]%{(&ff=='unix'?'':&ff)}\ %m%r%=%l,%c\ [%B]\ %p%%
 set t_Co=256                     " 256色
 set wildmenu                     " コマンド補完を強化
-set laststatus=2                 " 常にステータスラインを表示
+set wildignore=.git,.svn
+set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png
+set wildignore+=*.o,*.out,*.exe,*.dll
+set wildignore+=*.DS_Store
+
 setlocal formatoptions-=ro
 colorscheme default
 au FileType c setl ts=8 sw=4 softtabstop=4 noexpandtab
@@ -52,8 +60,8 @@ nnoremap :to :tabonly<CR>
 nnoremap s :Switch<CR>
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]> 
-" コンマの後に自動的にスペースを挿入
-inoremap , ,<Space>
+" 検索語が画面の真ん中に来るようにする
+nmap n nzz
 
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
@@ -63,6 +71,17 @@ match ZenkakuSpace /　/
 augroup vimrc-checktime
   autocmd!
   autocmd TabEnter * checktime
+augroup END
+
+"バイナリ編集
+augroup BinaryXXD
+  autocmd!
+  autocmd BufReadPre *.o,*.so*,*.out,*.png,*.jpg,*.jpeg.*.gif let &binary =1
+  autocmd BufReadPost * if &binary | silent %!xxd -g 1
+  autocmd BufReadPost * set ft=xxd | endif
+  autocmd BufWritePre * if &binary | %!xxd -r | endif
+  autocmd BufWritePost * if &binary | silent %!xxd -g 1
+  autocmd BufWritePost * set nomod | endif
 augroup END
 
 " <TAB>で補完
@@ -80,6 +99,37 @@ function! InsertTabWrapper()
 endfunction
 " Remap the tab key to select action with InsertTabWrapper
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+
+"挿入モード時、ステータスラインの色を変更
+let g:hi_insert = 'highlight StatusLine ctermfg=white ctermbg=blue cterm=none'
+
+if has('syntax')
+  augroup InsertHook
+    autocmd!
+    autocmd InsertEnter * call s:StatusLine('Enter')
+    autocmd InsertLeave * call s:StatusLine('Leave')
+  augroup END
+endif
+
+let s:slhlcmd = ''
+function! s:StatusLine(mode)
+  if a:mode == 'Enter'
+    silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
+    silent exec g:hi_insert
+  else
+    highlight clear StatusLine
+    silent exec s:slhlcmd
+  endif
+endfunction
+
+function! s:GetHighlight(hi)
+  redir => hl
+  exec 'highlight '.a:hi
+  redir END
+  let hl = substitute(hl, '[\r\n]', '', 'g')
+  let hl = substitute(hl, 'xxx', '', '')
+  return hl
+endfunction
 
 " CRuby関連
 function! s:CRuby_setup()
