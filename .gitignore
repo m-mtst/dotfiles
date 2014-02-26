@@ -1,2 +1,8 @@
 .*.swp
+*.log
+*.o
+tags
+TAGS
+.svn
+.DS_Store
 vendor/bundle
