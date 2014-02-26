@@ -25,13 +25,15 @@ set noswapfile                   " スワップファイル作らない
 set showcmd                      " コマンドをステータス行に表示
 set cursorline                   " カーソル行をハイライト
 set ttyfast                      " 高速ターミナル接続を行う
+set nrformats-=octal             " 先頭に0がある数字でも10進数とみなす
 set laststatus=2                 " 常にステータスラインを表示
 set statusline=%F\ %y[%{&fileencoding}]%{(&ff=='unix'?'':&ff)}\ %m%r%=%l,%c\ [%B]\ %p%%
 set t_Co=256                     " 256色
 set wildmenu                     " コマンド補完を強化
 set wildignore=.git,.svn
 set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png
-set wildignore+=*.o,*.out,*.exe,*.dll
+set wildignore+=*.o,*.so,*.out,*.exe,*.dll
+set wildignore+=*.swp,*.bak,*.old,*.tmp
 set wildignore+=*.DS_Store
 
 setlocal formatoptions-=ro
@@ -58,6 +60,10 @@ nnoremap :tn :tabnew<CR>
 nnoremap :te :tabedit
 nnoremap :to :tabonly<CR>
 nnoremap s :Switch<CR>
+" インクリメント
+nnoremap <C-i> <C-a>
+" デクリメント
+nnoremap <C-d> <C-x>
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]> 
 " 検索語が画面の真ん中に来るようにする
