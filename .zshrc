@@ -19,7 +19,7 @@ setopt magic_equal_subst # =以降も補完する(--prefix=/usrなど)
 setopt extended_history   # ヒストリに実行時間も保存する
 setopt rm_star_wait # 10 秒間反応しなくなり、頭を冷ます時間が与えられる
 
-function chpwd() { ls --classify --color=auto } # cdのたびにls
+function chpwd() { ls --color=auto } # cdのたびにls
 
 HISTSIZE=100
 SAVEHIST=100
@@ -55,7 +55,7 @@ alias jbundle="jruby -S bundle"
 alias vim="vim -p"
 alias vi="vim"
 alias iv="vi"
-alias ls="ls --classify --color=auto"
+alias ls="ls --color=auto"
 alias ll="ls -l"
 alias lhl="ls -h -l"
 alias df="df -h"
