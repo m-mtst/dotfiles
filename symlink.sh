@@ -1,8 +1,8 @@
 #!/bin/sh
-cd $(dirname $0)
+cd $_
 for dotfile in `find .* -maxdepth 0`; do
   if [ $dotfile != '.' ] && [ $dotfile != '..' ] && [ $dotfile != '.git' ]
   then
-    ln -Ffs "$PWD/$dotfile" $HOME
+    ln -Ffs "$_/$dotfile" $HOME
   fi
 done
