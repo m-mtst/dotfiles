@@ -6,4 +6,4 @@ TAGS
 .svn
 .DS_Store
 vendor/bundle
-.vim/bundle/.neobundle/install_info
+.vim/bundle/.neobundle
