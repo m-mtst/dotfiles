@@ -23,7 +23,6 @@ set nobackup                     " バックアップ取らない
 set autoread                     " 他で書き換えられたら自動で読み直す
 set noswapfile                   " スワップファイル作らない
 set showcmd                      " コマンドをステータス行に表示
-set cursorline                   " カーソル行をハイライト
 set ttyfast                      " 高速ターミナル接続を行う
 set nrformats-=octal             " 先頭に0がある数字でも10進数とみなす
 set laststatus=2                 " 常にステータスラインを表示
