@@ -52,7 +52,6 @@ alias tl="tmux ls"
 alias tn="tmux new -s"
 alias ta="tmux a -t"
 alias tk="tmux kill-session -t"
-alias jbundle="jruby -S bundle"
 alias vim="vim -p"
 alias vi="vim"
 alias iv="vi"
@@ -98,6 +97,10 @@ fi
 
 if which git flow > /dev/null 2>&1; then
   source ~/.git-flow-completion.zsh
+fi
+
+if which bundle > /dev/null 2>&1; then
+  alias jbundle="jruby -S bundle"
 fi
 
 # Gitのルートディレクトリへ簡単に移動できるようにする関数
