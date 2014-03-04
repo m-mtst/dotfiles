@@ -43,6 +43,7 @@ au FileType javascript setl nowrap tabstop=2 tw=0 sw=2 expandtab
 au FileType coffee setl sw=2 sts=2 tabstop=2 expandtab
 au BufNewFile,BufRead Rakefile setf ruby
 au BufNewFile,BufRead Capfile setf ruby
+au BufNewFile,BufRead Berksfile setf ruby
 au BufNewFile,BufRead config.ru setf ruby
 au BufNewFile,BufRead insns.def setf c
 au BufNewFile,BufRead *.y setf c
