@@ -36,7 +36,6 @@ set wildignore+=*.swp,*.bak,*.old,*.tmp
 set wildignore+=*.DS_Store
 
 setlocal formatoptions-=ro
-colorscheme default
 au FileType c setl ts=8 sw=4 softtabstop=4 noexpandtab
 au FileType ruby setl nowrap tabstop=2 tw=0 sw=2 expandtab
 au FileType javascript setl nowrap tabstop=2 tw=0 sw=2 expandtab
@@ -73,13 +72,14 @@ nmap n nzz
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 match ZenkakuSpace /　/
 
-" 外部で変更のあったファイルを自動的に読み直す http://vim-users.jp/2011/03/hack206/
+" 外部で変更のあったファイルを自動的に読み直す http://vim-users.jp/2011/03/hack206/ {{{
 augroup vimrc-checktime
   autocmd!
   autocmd TabEnter * checktime
 augroup END
+"}}}
 
-"バイナリ編集
+"バイナリ編集 {{{
 augroup BinaryXXD
   autocmd!
   autocmd BufReadPre *.o,*.so*,*.out,*.png,*.jpg,*.jpeg.*.gif let &binary =1
@@ -89,8 +89,9 @@ augroup BinaryXXD
   autocmd BufWritePost * if &binary | silent %!xxd -g 1
   autocmd BufWritePost * set nomod | endif
 augroup END
+"}}}
 
-" <TAB>で補完
+" <TAB>で補完 {{{
 function! InsertTabWrapper()
   let col = col('.') - 1
   if !col || getline('.')[col - 1] !~ '\k'
@@ -105,8 +106,9 @@ function! InsertTabWrapper()
 endfunction
 " Remap the tab key to select action with InsertTabWrapper
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+"}}}
 
-"挿入モード時、ステータスラインの色を変更
+" 挿入モード時、ステータスラインの色を変更 {{{
 let g:hi_insert = 'highlight StatusLine ctermfg=white ctermbg=blue cterm=none'
 
 if has('syntax')
@@ -136,8 +138,9 @@ function! s:GetHighlight(hi)
   let hl = substitute(hl, 'xxx', '', '')
   return hl
 endfunction
+"}}}
 
-" CRuby関連
+" CRuby関連 {{{
 function! s:CRuby_setup()
   setlocal tabstop=8 softtabstop=4 shiftwidth=4 noexpandtab
   syntax keyword cType VALUE ID RUBY_DATA_FUNC BDIGIT BDIGIT_DBL BDIGIT_DBL_SIGNED ruby_glob_func
@@ -196,11 +199,13 @@ augroup CRuby
   autocmd BufWinEnter,BufNewFile ~/git/ruby/ruby/*.[chy] call s:CRuby_setup()
   autocmd BufWinEnter,BufNewFile *.{c,cc,cpp,h,hh,hpp} call s:CRuby_ext_setup()
 augroup END
+"}}}
 
-" 検索結果のハイライトをさりげなく消す
+" 検索結果のハイライトをさりげなく消す {{{
 " http://d.hatena.ne.jp/viver/20070612/p1
 set hlsearch
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
+" }}}
 
 " Unite.vim
 nnoremap <silent> <Leader>f :<C-u>VimFiler -split -simple -winwidth=35 -no-quit<CR>
@@ -270,6 +275,51 @@ if &term =~ "xterm"
     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
 
+" 文字コードの自動認識 {{{
+" http://www.kawaz.jp/pukiwiki/?vim#content_1_7
+if &encoding !=# 'utf-8'
+  set encoding=japan
+  set fileencoding=japan
+endif
+if has('iconv')
+  let s:enc_euc = 'euc-jp'
+  let s:enc_jis = 'iso-2022-jp'
+  " iconvがeucJP-msに対応しているかをチェック
+  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'eucjp-ms'
+    let s:enc_jis = 'iso-2022-jp-3'
+  " iconvがJISX0213に対応しているかをチェック
+  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'euc-jisx0213'
+    let s:enc_jis = 'iso-2022-jp-3'
+  endif
+  " fileencodingsを構築
+  if &encoding ==# 'utf-8'
+    let s:fileencodings_default = &fileencodings
+    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
+    let &fileencodings = s:fileencodings_default .','. &fileencodings
+    unlet s:fileencodings_default
+  else
+    let &fileencodings = &fileencodings .','. s:enc_jis
+    set fileencodings+=utf-8,ucs-2le,ucs-2
+    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
+      set fileencodings+=cp932
+      set fileencodings-=euc-jp
+      set fileencodings-=euc-jisx0213
+      set fileencodings-=eucjp-ms
+      let &encoding = s:enc_euc
+      let &fileencoding = s:enc_euc
+    else
+      let &fileencodings = &fileencodings .','. s:enc_euc
+    endif
+  endif
+  " 定数を処分
+  unlet s:enc_euc
+  unlet s:enc_jis
+endif
+" }}}
+
+" NeoBundle {{{
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neosnippet.vim'
@@ -292,18 +342,20 @@ if neobundle#exists_not_installed_bundles()
    echomsg 'Please execute ":NeoBundleInstall" command.'
 endif
 filetype plugin indent on
+" }}}
 
 let g:syntastic_mode_map = { 'passive_filetypes': ['c'] }
 
 let g:changelog_timeformat = "%a %b %e %T %Y"
-let g:changelog_username = "Masaki Matsushita  <glass.saga@gmail.com>"
+let g:changelog_username = system("git config -z user.name") . " <" . system("git config -z user.email") . ">"
 
-" neocomplcache
+" neocomplcache {{{
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_quick_match = 0
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
-let g:NeoComplCache_enable_info = 1
+let g:neocomplcache_enable_info = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_manual_completion_start_length = 2
 let g:neocomplcache_force_overwrite_completefunc=1 " vim-railsの補完を上書き
+" }}}
