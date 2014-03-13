@@ -8,7 +8,7 @@ export JRUBY_OPTS="--1.9"
 export EDITOR="vim"
 
 # $LS_COLORS
-if [ -f /etc/DIR_COLORS ]; then
+if [ "$LS_COLORS" -a -f /etc/DIR_COLORS ]; then
   eval $(dircolors /etc/DIR_COLORS)
 fi
 
