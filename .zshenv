@@ -7,6 +7,11 @@ export LANGUAGE=$LANG
 export JRUBY_OPTS="--1.9"
 export EDITOR="vim"
 
+# $LS_COLORS
+if [ -f /etc/DIR_COLORS ]; then
+  eval $(dircolors /etc/DIR_COLORS)
+fi
+
 path=(
   $HOME/.gem/ruby/2.1.0/bin(N-/)
   $path

@@ -2,6 +2,7 @@ autoload -U colors
 colors
 autoload -U compinit
 compinit
+zstyle ':completion:*' list-colors "${LS_COLORS}" # 補完候補のカラー表示
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # 補完時に大文字小文字を区別しない
 zstyle ':completion:*:default' menu select=1 # 補完候補を矢印キーで選択
 setopt listpacked #補完リストを詰めて表示
