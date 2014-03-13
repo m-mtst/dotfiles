@@ -41,9 +41,19 @@ precmd () {
 }
 RPROMPT="%1(v|%F{green}%1v%f|)"
 
+# C-^ で一つ上のディレクトリへ
+function cdup() {
+  echo
+  cd ..
+  zle reset-prompt
+}
+
 bindkey -v # vim mode
 bindkey '\e[1~' beginning-of-line #Home,Endキーを動作させる
 bindkey '\e[4~' end-of-line 
+zle -N cdup
+bindkey '^^' cdup
+
 alias cp="cp -i"
 alias rm="rm -i"
 alias mv="mv -i"
