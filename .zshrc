@@ -22,7 +22,7 @@ setopt rm_star_wait # 10 秒間反応しなくなり、頭を冷ます時間が�
 
 # cdのたびにls
 if [ `uname` = "Darwin" ]; then
-  function chpwd() { ls -G } 
+  function chpwd() { ls -vG } 
 else
   function chpwd() { ls --color=auto } 
 fi
@@ -72,7 +72,7 @@ alias vim="vim -p"
 alias vi="vim"
 alias iv="vi"
 if [ `uname` = "Darwin" ]; then
-  alias ls="ls -G"
+  alias ls="ls -vG"
 else
   alias ls="ls --color=auto"
 fi
