@@ -34,6 +34,7 @@ set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png
 set wildignore+=*.o,*.so,*.out,*.exe,*.dll
 set wildignore+=*.swp,*.bak,*.old,*.tmp
 set wildignore+=*.DS_Store
+set encoding=utf-8
 
 setlocal formatoptions-=ro
 au FileType c setl ts=8 sw=4 softtabstop=4 noexpandtab

@@ -20,7 +20,12 @@ setopt magic_equal_subst # =以降も補完する(--prefix=/usrなど)
 setopt extended_history   # ヒストリに実行時間も保存する
 setopt rm_star_wait # 10 秒間反応しなくなり、頭を冷ます時間が与えられる
 
-function chpwd() { ls --color=auto } # cdのたびにls
+# cdのたびにls
+if [ `uname` = "Darwin" ]; then
+  function chpwd() { ls -G } 
+else
+  function chpwd() { ls --color=auto } 
+fi
 
 HISTSIZE=100
 SAVEHIST=100
@@ -66,7 +71,11 @@ alias tk="tmux kill-session -t"
 alias vim="vim -p"
 alias vi="vim"
 alias iv="vi"
-alias ls="ls --color=auto"
+if [ `uname` = "Darwin" ]; then
+  alias ls="ls -G"
+else
+  alias ls="ls --color=auto"
+fi
 alias ll="ls -l"
 alias lhl="ls -h -l"
 alias df="df -h"

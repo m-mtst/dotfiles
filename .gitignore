@@ -7,3 +7,4 @@ TAGS
 .DS_Store
 vendor/bundle
 .vim/bundle/.neobundle
+cookbooks
