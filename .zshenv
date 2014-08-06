@@ -14,6 +14,7 @@ fi
 
 path=(
   $HOME/.gem/ruby/2.1.0/bin(N-/)
+  /usr/local/bin
   $path
   $HOME/ruby_trunk/bin(N-/)
 )
