@@ -1,6 +1,6 @@
 set nocompatible
 "set number " 行番号表示
-set clipboard=unnamed,autoselect " 無名レジスタの内容をクリップボードに書き込む
+"set clipboard=unnamed,autoselect " 無名レジスタの内容をクリップボードに書き込む
 set includeexpr=''
 set pastetoggle=<F12>
 set autoindent
