@@ -249,19 +249,7 @@ function! s:write_check_typo(file)
     endif
 endfunction
 
-" vimfiler
-" Edit file by tabedit.
-" http://lsifrontend.blog100.fc2.com/blog-entry-343.html
-"let g:vimfiler_edit_action = 'tabopen'
-" デフォルトのキーマッピングを変更
-augroup vimrc
-  autocmd FileType vimfiler call s:vimfiler_my_settings()
-augroup END
-function! s:vimfiler_my_settings()
-  nmap <buffer> q <Plug>(vimfiler_exit)
-endfunction
-
-" Bracketed Paste Modeを有効にする
+" Bracketed Paste Modeを有効にする {{{
 " http://ttssh2.sourceforge.jp/manual/ja/usage/tips/vim.html
 if &term =~ "xterm"
     let &t_SI .= "\e[?2004h"
@@ -275,6 +263,7 @@ if &term =~ "xterm"
 
     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
+" }}}
 
 " 文字コードの自動認識 {{{
 " http://www.kawaz.jp/pukiwiki/?vim#content_1_7
@@ -326,7 +315,7 @@ NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'honza/vim-snippets'
-NeoBundle 'Shougo/unite.vim'
+"NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'thinca/vim-quickrun'
@@ -334,7 +323,7 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'tpope/vim-rails'
-NeoBundle 'alpaca-tc/alpaca_tags'
+"NeoBundle 'alpaca-tc/alpaca_tags'
 NeoBundle 'AndrewRadev/switch.vim'
 
 if neobundle#exists_not_installed_bundles()
@@ -361,3 +350,16 @@ let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_manual_completion_start_length = 2
 let g:neocomplcache_force_overwrite_completefunc=1 " vim-railsの補完を上書き
 " }}}
+
+" vim-jsonでconcealをしない
+let g:vim_json_syntax_conceal = 0
+
+augroup AlpacaTags
+  autocmd!
+  if exists(':AlpacaTags')
+    autocmd BufWritePost Gemfile TagsBundle
+    autocmd BufEnter * TagsSet
+    " 毎回保存と同時更新する場合はコメントを外す
+    " autocmd BufWritePost * TagsUpdate
+  endif
+augroup END
