@@ -348,7 +348,8 @@ filetype plugin indent on
 let g:syntastic_mode_map = { 'passive_filetypes': ['c'] }
 
 let g:changelog_timeformat = "%a %b %e %T %Y"
-let g:changelog_username = system("git config -z user.name") . " <" . system("git config -z user.email") . ">"
+"let g:changelog_username = system("git config -z user.name") . " <" . system("git config -z user.email") . ">"
+let g:changelog_username = "Masaki Matsushita <glass.saga@gmail.com>"
 
 " neocomplcache {{{
 let g:neocomplcache_enable_at_startup = 1

@@ -11,7 +11,7 @@ setopt auto_cd # cd入力いらず
 setopt auto_pushd # ディレクトリの一覧表示
 setopt nolistbeep # 補完時にbeepしない
 setopt nonomatch
-setopt correct
+#setopt correct
 setopt print_exit_value # 戻り値が0以外の場合終了コードを表示
 setopt auto_param_slash # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
 setopt auto_param_keys # カッコの対応などを自動的に補完
@@ -33,6 +33,21 @@ SAVEHIST=100
 PROMPT="%B%(?.%F{green}.%F{red})%~%#%f%b "
 PROMPT2="%_%%"
 SPROMPT="%r is correct? [n,y,a,e]: "
+
+#zshプロンプトにモード表示####################################
+function zle-line-init zle-keymap-select {
+  case $KEYMAP in
+    vicmd)
+    PROMPT="%B%F{blue}%~%#%f%b "
+    ;;
+    main|viins)
+    PROMPT="%B%(?.%F{green}.%F{red})%~%#%f%b "
+    ;;
+  esac
+  zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 # http://d.hatena.ne.jp/mollifier/20090814/p1
 autoload -Uz vcs_info
