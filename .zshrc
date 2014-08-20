@@ -68,7 +68,7 @@ function cdup() {
   zle reset-prompt
 }
 
-bindkey -v # vim mode
+#bindkey -v # vim mode
 bindkey '\e[1~' beginning-of-line #Home,Endキーを動作させる
 bindkey '\e[4~' end-of-line 
 zle -N cdup
