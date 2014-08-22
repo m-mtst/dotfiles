@@ -152,6 +152,13 @@ if which bundle > /dev/null 2>&1; then
   alias jbundle="jruby -S bundle"
 fi
 
+if which jwhois > /dev/null 2>&1; then
+  # whoisの文字化け回避
+  function whois() {
+    jwhois $* | iconv -f ISO-2022-JP -t UTF-8
+  }
+fi
+
 # Gitのルートディレクトリへ簡単に移動できるようにする関数
 # http://qiita.com/ponko2@github/items/d5f45b2cf2326100cdbc
 function root() {
@@ -160,10 +167,7 @@ function root() {
   fi
 }
 
-# whoisの文字化け回避
-function whois() {
-  jwhois $* | iconv -f ISO-2022-JP -t UTF-8
-}
+
 
 # crontabの-eを禁止, -rは確認を強制
 function crontab() {
