@@ -167,8 +167,6 @@ function root() {
   fi
 }
 
-
-
 # crontabの-eを禁止, -rは確認を強制
 function crontab() {
   if [ $1 = -e ]; then
@@ -181,5 +179,7 @@ function crontab() {
     command crontab $@
   fi
 }
+
+source ~/.tmuxinator/tmuxinator.zsh
 
 ls
