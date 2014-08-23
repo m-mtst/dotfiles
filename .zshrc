@@ -34,21 +34,6 @@ PROMPT="%B%(?.%F{green}.%F{red})%~%#%f%b "
 PROMPT2="%_%%"
 SPROMPT="%r is correct? [n,y,a,e]: "
 
-#zshプロンプトにモード表示####################################
-function zle-line-init zle-keymap-select {
-  case $KEYMAP in
-    vicmd)
-    PROMPT="%B%F{blue}%~%#%f%b "
-    ;;
-    main|viins)
-    PROMPT="%B%(?.%F{green}.%F{red})%~%#%f%b "
-    ;;
-  esac
-  zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
-
 # http://d.hatena.ne.jp/mollifier/20090814/p1
 autoload -Uz vcs_info
 zstyle ':vcs_info:git:*' check-for-changes true
@@ -68,7 +53,6 @@ function cdup() {
   zle reset-prompt
 }
 
-#bindkey -v # vim mode
 bindkey '\e[1~' beginning-of-line #Home,Endキーを動作させる
 bindkey '\e[4~' end-of-line 
 zle -N cdup
