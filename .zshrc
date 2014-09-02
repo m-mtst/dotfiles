@@ -5,6 +5,9 @@ compinit
 zstyle ':completion:*' list-colors "${LS_COLORS}" # 補完候補のカラー表示
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # 補完時に大文字小文字を区別しない
 zstyle ':completion:*:default' menu select=1 # 補完候補を矢印キーで選択
+zstyle ':completion:history-words:*' list no 
+zstyle ':completion:history-words:*' menu yes
+zstyle ':completion:history-words:*' remove-all-dups yes
 setopt listpacked #補完リストを詰めて表示
 setopt hist_ignore_all_dups # 既にヒストリにあるコマンド行は古い方を削除
 setopt auto_cd # cd入力いらず
@@ -46,17 +49,10 @@ precmd () {
 }
 RPROMPT="%1(v|%F{green}%1v%f|)"
 
-# C-^ で一つ上のディレクトリへ
-function cdup() {
-  echo
-  cd ..
-  zle reset-prompt
-}
-
+bindkey -d
 bindkey '\e[1~' beginning-of-line #Home,Endキーを動作させる
 bindkey '\e[4~' end-of-line 
-zle -N cdup
-bindkey '^^' cdup
+bindkey '^h' _history-complete-older
 
 alias cp="cp -i"
 alias rm="rm -i"
@@ -76,8 +72,8 @@ else
   alias ls="ls --color=auto"
 fi
 alias ll="ls -l"
-alias lhl="ls -h -l"
-alias df="df -h"
+alias lhl="ls -hl"
+alias df="df -Th"
 alias gs="git status"
 alias gc="git checkout"
 alias gb="git branch"
@@ -87,8 +83,9 @@ alias gdm="gd master"
 alias gl="git log"
 alias gp="git pull --rebase"
 alias gr="git remote -v"
-alias gf="git flow"
 alias be="bundle exec"
+alias ...="cd ../.."
+alias ....="cd ../../.."
 alias -s txt=cat
 alias -s rb=ruby
 alias -s pl=perl
