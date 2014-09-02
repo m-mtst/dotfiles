@@ -53,6 +53,7 @@ bindkey -d
 bindkey '\e[1~' beginning-of-line #Home,Endキーを動作させる
 bindkey '\e[4~' end-of-line 
 bindkey '^h' _history-complete-older
+bindkey -r ':'
 
 alias cp="cp -i"
 alias rm="rm -i"
