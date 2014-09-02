@@ -161,6 +161,8 @@ function crontab() {
   fi
 }
 
-source ~/.tmuxinator/tmuxinator.zsh
+if [[ -f ~/.tmuxinator/tmuxinator.zsh ]]; then
+  source ~/.tmuxinator/tmuxinator.zsh
+fi
 
 ls
