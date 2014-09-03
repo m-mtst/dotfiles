@@ -5,7 +5,6 @@ export LC_ALL=$LANG
 export LANGUAGE=$LANG
 export JRUBY_OPTS="--1.9"
 export EDITOR="vim"
-export SHELL="zsh"
 
 # $LS_COLORS
 if [ ! "$LS_COLORS" -a -f /etc/DIR_COLORS ]; then

@@ -25,9 +25,13 @@ setopt rm_star_wait # 10 秒間反応しなくなり、頭を冷ます時間が�
 
 # cdのたびにls
 if [ `uname` = "Darwin" ]; then
-  function chpwd() { ls -vG } 
+  function chpwd() {
+    # tmuxのカレントディレクトリ設定: http://filmlang.org/2011/05/12/tmux/setting
+    [ -n $TMUX ] && tmux setenv TMUXPWD_$(tmux display -p "#I") $PWD
+    ls -vG
+  }
 else
-  function chpwd() { ls --color=auto } 
+  function chpwd() { ls --color=auto }
 fi
 
 HISTSIZE=100
@@ -92,20 +96,6 @@ alias -s rb=ruby
 alias -s pl=perl
 alias -s yml=vim
 alias -s git=git
-
-function extract() {
-  case $1 in
-    *.tar.gz|*.tgz) tar xzvf $1;;
-    *.tar.bz2|*.tbz) tar xjvf $1;;
-    *.tar.xz) tar xJvf $1;;
-    *.zip) unzip $1;;
-    *.gz) gzip -dc $1;;
-    *.bz2) bzip2 -dc $1;;
-    *.Z) uncompress $1;;
-  esac
-}
-
-alias -s {tgz,tbz,gz,bz2,xz,zip,Z}=extract
 
 if which pygmentize > /dev/null 2>&1; then
   alias ccat='pygmentize -O style=vim -f console256 -g' # colorized cat

@@ -8,3 +8,4 @@ TAGS
 vendor/bundle
 .vim/bundle/.neobundle
 cookbooks
+.tmuxinator/push.yml
