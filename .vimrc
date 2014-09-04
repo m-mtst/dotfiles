@@ -35,6 +35,7 @@ set wildignore+=*.o,*.so,*.out,*.exe,*.dll
 set wildignore+=*.swp,*.bak,*.old,*.tmp
 set wildignore+=*.DS_Store
 set encoding=utf-8
+set fileencoding=utf-8
 
 setlocal formatoptions-=ro
 au FileType c setl ts=8 sw=4 softtabstop=4 noexpandtab
@@ -141,6 +142,7 @@ function! s:GetHighlight(hi)
 endfunction
 "}}}
 
+
 " CRuby関連 {{{
 function! s:CRuby_setup()
   setlocal tabstop=8 softtabstop=4 shiftwidth=4 noexpandtab
@@ -202,19 +204,17 @@ augroup CRuby
 augroup END
 "}}}
 
-" 検索結果のハイライトをさりげなく消す {{{
-" http://d.hatena.ne.jp/viver/20070612/p1
+" 検索結果のハイライトをさりげなく消す: http://d.hatena.ne.jp/viver/20070612/p1
 set hlsearch
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
-" }}}
 
-" Unite.vim
-nnoremap <silent> <Leader>f :<C-u>VimFiler -split -simple -winwidth=35 -no-quit<CR>
+" neosnippet {{{
+" <TAB>: completion.                                         
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>" 
 
 " Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
 
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -225,11 +225,9 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets, ~/.vim/snippets'
+" }}}
 
 " neobundle
 filetype off
