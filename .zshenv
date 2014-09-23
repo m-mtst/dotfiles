@@ -2,6 +2,7 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 export GEM_HOME="$HOME/.gem/ruby/2.1.0"
 export LANG="ja_JP.UTF8"
 export LC_ALL=$LANG
+export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8"
 export JRUBY_OPTS="--1.9"
 export EDITOR="vim"
 export LESSCHARSET=utf-8 # Macでgit logした時の文字化け対策
