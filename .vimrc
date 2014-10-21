@@ -20,6 +20,8 @@ set ignorecase                   " 検索時に大文字小文字を区別しな
 set smartcase                    " 検索パターンに大文字が含まれる場合だけ大文字小文字を区別する
 set backspace=indent,eol,start   " バックスペースでなんでも消せるように
 set nobackup                     " バックアップ取らない
+set nowritebackup
+set noswapfile
 set autoread                     " 他で書き換えられたら自動で読み直す
 set noswapfile                   " スワップファイル作らない
 set showcmd                      " コマンドをステータス行に表示
@@ -36,6 +38,8 @@ set wildignore+=*.swp,*.bak,*.old,*.tmp
 set wildignore+=*.DS_Store
 set encoding=utf-8
 set fileencoding=utf-8
+set incsearch
+set hlsearch
 
 setlocal formatoptions-=ro
 au FileType c setl ts=8 sw=4 softtabstop=4 noexpandtab
@@ -205,7 +209,6 @@ augroup END
 "}}}
 
 " 検索結果のハイライトをさりげなく消す: http://d.hatena.ne.jp/viver/20070612/p1
-set hlsearch
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 " neosnippet {{{
