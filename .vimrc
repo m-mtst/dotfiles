@@ -1,6 +1,6 @@
 set nocompatible
 "set number " 行番号表示
-set clipboard=unnamed,autoselect " 無名レジスタの内容をクリップボードに書き込む
+set clipboard=autoselect
 set includeexpr=''
 set pastetoggle=<F12>
 set autoindent
@@ -42,7 +42,7 @@ set incsearch
 set hlsearch
 
 setlocal formatoptions-=ro
-au FileType c setl ts=8 sw=4 softtabstop=4 noexpandtab
+au FileType c setl ts=8 sw=4 softtabstop=4 noexpandtab colorcolumn=80
 au FileType ruby setl nowrap tabstop=2 tw=0 sw=2 expandtab
 au FileType javascript setl nowrap tabstop=2 tw=0 sw=2 expandtab
 au FileType coffee setl sw=2 sts=2 tabstop=2 expandtab
@@ -208,8 +208,8 @@ augroup CRuby
 augroup END
 "}}}
 
-" 検索結果のハイライトをさりげなく消す: http://d.hatena.ne.jp/viver/20070612/p1
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
+" ESCを二回押すことでハイライトを消す: http://lambdalisue.hatenablog.com/entry/2013/06/23/071344
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
 
 " neosnippet {{{
 " <TAB>: completion.                                         
