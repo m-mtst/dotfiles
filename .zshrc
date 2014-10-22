@@ -88,13 +88,14 @@ alias gl="git log"
 alias gp="git pull --rebase"
 alias gr="git remote -v"
 alias be="bundle exec"
+alias py="python"
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias -s txt=cat
 alias -s rb=ruby
 alias -s pl=perl
 alias -s yml=vim
-alias -s git=git
+alias -s git="git clone"
 
 if which pygmentize > /dev/null 2>&1; then
   alias ccat='pygmentize -O style=vim -f console256 -g' # colorized cat
