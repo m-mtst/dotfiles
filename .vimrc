@@ -1,5 +1,5 @@
 set nocompatible
-set number " 行番号表示
+"set number " 行番号表示
 set clipboard=autoselect
 set includeexpr=''
 set pastetoggle=<F12>
@@ -60,7 +60,7 @@ nnoremap :tn :tabnew<CR>
 nnoremap :te :tabedit
 nnoremap :to :tabonly<CR>
 nnoremap s :Switch<CR>
-nnoremap f :VimFiler -split -simple -winwidth=35 -no-quit<CR>
+nnoremap f :VimFiler -split -simple -winwidth=35 -toggle<CR>
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]> 
 " 検索語が画面の真ん中に来るようにする
@@ -320,6 +320,7 @@ NeoBundle 'tpope/vim-rails'
 "NeoBundle 'alpaca-tc/alpaca_tags'
 NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
+NeoBundle "vim-scripts/taglist.vim"
 
 if neobundle#exists_not_installed_bundles()
    echomsg 'Not installed bundles : ' .
@@ -359,3 +360,12 @@ let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに
 "    " autocmd BufWritePost * TagsUpdate
 "  endif
 "augroup END
+
+set tags=tags
+let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
+"let Tlist_Show_One_File = 1 "現在編集中のソースのタグしか表示しない
+let Tlist_Exit_OnlyWiindow = 1 "taglist が最後のウインドウなら vim を閉じる
+"let Tlist_Enable_Fold_Column = 1 " 折り畳み
+map <silent> <leader>tl :TlistToggle<CR>
+let Tlist_Use_Right_Window = 1 " 右側にtag listのウインドうを表示する
+nnoremap l :TlistToggle<CR>
