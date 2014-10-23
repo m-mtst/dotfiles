@@ -1,5 +1,5 @@
 set nocompatible
-"set number " 行番号表示
+set number " 行番号表示
 set clipboard=autoselect
 set includeexpr=''
 set pastetoggle=<F12>
@@ -7,13 +7,15 @@ set autoindent
 set smartindent  " 新しい行を開始したときに、新しい行のインデントを現在行と同じ量にする。
 set tabstop=2
 set shiftwidth=2
+set softtabstop=2
+set textwidth=0
+set nowrap
 set whichwrap=b,s,h,l,<,>,[,]
 set ruler
 set ambiwidth=double
 set foldmethod=marker
 set expandtab
 set mouse=a
-set guioptions+=a
 set ttymouse=xterm2
 set fileformats=unix,dos,mac     " 改行コードの自動認識
 set ignorecase                   " 検索時に大文字小文字を区別しない
@@ -21,31 +23,24 @@ set smartcase                    " 検索パターンに大文字が含まれる
 set backspace=indent,eol,start   " バックスペースでなんでも消せるように
 set nobackup                     " バックアップ取らない
 set nowritebackup
-set noswapfile
-set autoread                     " 他で書き換えられたら自動で読み直す
 set noswapfile                   " スワップファイル作らない
+set autoread                     " 他で書き換えられたら自動で読み直す
 set showcmd                      " コマンドをステータス行に表示
 set ttyfast                      " 高速ターミナル接続を行う
+set lazyredraw
 set nrformats-=octal             " 先頭に0がある数字でも10進数とみなす
 set laststatus=2                 " 常にステータスラインを表示
 set statusline=%F\ %y[%{&fileencoding}]%{(&ff=='unix'?'':&ff)}\ %m%r%=%l,%c\ [%B]\ %p%%
 set t_Co=256                     " 256色
 set wildmenu                     " コマンド補完を強化
-set wildignore=.git,.svn
-set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png
-set wildignore+=*.o,*.so,*.out,*.exe,*.dll
-set wildignore+=*.swp,*.bak,*.old,*.tmp
-set wildignore+=*.DS_Store
+set wildignore=.git,.svn,*.jpg,*.jpeg,*.bmp,*.gif,*.png,*.o,*.so,*.out,*.exe,*.dll,*.swp,*.bak,*.old,*.tmp,*.DS_Store
 set encoding=utf-8
 set fileencoding=utf-8
 set incsearch
 set hlsearch
 
 setlocal formatoptions-=ro
-au FileType c setl ts=8 sw=4 softtabstop=4 noexpandtab colorcolumn=80
-au FileType ruby setl nowrap tabstop=2 tw=0 sw=2 expandtab
-au FileType javascript setl nowrap tabstop=2 tw=0 sw=2 expandtab
-au FileType coffee setl sw=2 sts=2 tabstop=2 expandtab
+au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab textwidth=80 colorcolumn=80
 au BufNewFile,BufRead Rakefile setf ruby
 au BufNewFile,BufRead Capfile setf ruby
 au BufNewFile,BufRead Berksfile setf ruby
@@ -53,7 +48,7 @@ au BufNewFile,BufRead config.ru setf ruby
 au BufNewFile,BufRead insns.def setf c
 au BufNewFile,BufRead *.y setf c
 au BufNewFile,BufRead *.template setf json
-au BufRead,BufNewFile,BufReadPre *.coffee set filetype=coffee
+au BufRead,BufNewFile,BufReadPre *.coffee setf coffee
 syntax enable
 highlight Pmenu ctermbg=4
 highlight PmenuSel ctermbg=1
@@ -65,10 +60,7 @@ nnoremap :tn :tabnew<CR>
 nnoremap :te :tabedit
 nnoremap :to :tabonly<CR>
 nnoremap s :Switch<CR>
-" インクリメント
-nnoremap <C-i> <C-a>
-" デクリメント
-nnoremap <C-d> <C-x>
+nnoremap f :VimFiler -split -simple -winwidth=35 -no-quit<CR>
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]> 
 " 検索語が画面の真ん中に来るようにする
@@ -208,8 +200,8 @@ augroup CRuby
 augroup END
 "}}}
 
-" ESCを二回押すことでハイライトを消す: http://lambdalisue.hatenablog.com/entry/2013/06/23/071344
-nmap <silent> <Esc><Esc> :nohlsearch<CR>
+" ハイライトをESCで消す
+"nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>
 
 " neosnippet {{{
 " <TAB>: completion.                                         
@@ -252,18 +244,18 @@ endfunction
 
 " Bracketed Paste Modeを有効にする {{{
 " http://ttssh2.sourceforge.jp/manual/ja/usage/tips/vim.html
-if &term =~ "xterm"
-    let &t_SI .= "\e[?2004h"
-    let &t_EI .= "\e[?2004l"
-    let &pastetoggle = "\e[201~"
-
-    function XTermPasteBegin(ret)
-        set paste
-        return a:ret
-    endfunction
-
-    inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
-endif
+"if &term =~ "xterm"
+"    let &t_SI .= "\e[?2004h"
+"    let &t_EI .= "\e[?2004l"
+"    let &pastetoggle = "\e[201~"
+"
+"    function XTermPasteBegin(ret)
+"        set paste
+"        return a:ret
+"    endfunction
+"
+"    inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+"endif
 " }}}
 
 " 文字コードの自動認識 {{{
@@ -316,8 +308,9 @@ NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'honza/vim-snippets'
-"NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/vimproc'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kchmck/vim-coffee-script'
@@ -326,6 +319,7 @@ NeoBundle 'elzr/vim-json'
 NeoBundle 'tpope/vim-rails'
 "NeoBundle 'alpaca-tc/alpaca_tags'
 NeoBundle 'AndrewRadev/switch.vim'
+NeoBundle 'ConradIrwin/vim-bracketed-paste'
 
 if neobundle#exists_not_installed_bundles()
    echomsg 'Not installed bundles : ' .
@@ -352,15 +346,16 @@ let g:neocomplcache_manual_completion_start_length = 2
 let g:neocomplcache_force_overwrite_completefunc=1 " vim-railsの補完を上書き
 " }}}
 
-" vim-jsonでconcealをしない
-let g:vim_json_syntax_conceal = 0
+let g:vim_json_syntax_conceal = 0 " vim-jsonでconcealをしない
+let g:vimfiler_as_default_explorer = 1 " :e . で VimFiler が起動するようになる
+let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに変更
 
-augroup AlpacaTags
-  autocmd!
-  if exists(':AlpacaTags')
-    autocmd BufWritePost Gemfile TagsBundle
-    autocmd BufEnter * TagsSet
-    " 毎回保存と同時更新する場合はコメントを外す
-    " autocmd BufWritePost * TagsUpdate
-  endif
-augroup END
+"augroup AlpacaTags
+"  autocmd!
+"  if exists(':AlpacaTags')
+"    autocmd BufWritePost Gemfile TagsBundle
+"    autocmd BufEnter * TagsSet
+"    " 毎回保存と同時更新する場合はコメントを外す
+"    " autocmd BufWritePost * TagsUpdate
+"  endif
+"augroup END
