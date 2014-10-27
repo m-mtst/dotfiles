@@ -60,7 +60,7 @@ nnoremap :tn :tabnew<CR>
 nnoremap :te :tabedit
 nnoremap :to :tabonly<CR>
 nnoremap s :Switch<CR>
-nnoremap f :VimFiler -split -simple -winwidth=35 -toggle<CR>
+nnoremap f :VimFilerSplit -simple -winwidth=35 -toggle -force-quit<CR>
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]> 
 " 検索語が画面の真ん中に来るようにする
