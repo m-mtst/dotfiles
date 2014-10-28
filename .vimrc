@@ -366,6 +366,7 @@ let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
 "let Tlist_Show_One_File = 1 "現在編集中のソースのタグしか表示しない
 let Tlist_Exit_OnlyWiindow = 1 "taglist が最後のウインドウなら vim を閉じる
 "let Tlist_Enable_Fold_Column = 1 " 折り畳み
+let Tlist_WinWidth = 80
 map <silent> <leader>tl :TlistToggle<CR>
 let Tlist_Use_Right_Window = 1 " 右側にtag listのウインドうを表示する
 nnoremap l :TlistToggle<CR>
