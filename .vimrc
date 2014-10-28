@@ -38,6 +38,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 set incsearch
 set hlsearch
+set splitbelow
 
 setlocal formatoptions-=ro
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab textwidth=80 colorcolumn=80
@@ -350,6 +351,15 @@ let g:neocomplcache_force_overwrite_completefunc=1 " vim-railsの補完を上書
 let g:vim_json_syntax_conceal = 0 " vim-jsonでconcealをしない
 let g:vimfiler_as_default_explorer = 1 " :e . で VimFiler が起動するようになる
 let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに変更
+
+" 横分割をするようにする
+let g:quickrun_config={
+\  '_': {
+\    'split': '20',
+\    'outputter/buffer/close_on_empty': 1,
+\    'outputter/buffer/into': 1
+\  }
+\}
 
 "augroup AlpacaTags
 "  autocmd!
