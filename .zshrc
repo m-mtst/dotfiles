@@ -152,6 +152,15 @@ function crontab() {
   fi
 }
 
+if [ `uname` = "Darwin" ]; then
+  function docker() {
+    if [ ! -n "$DOCKER_HOST" ]; then
+      $(boot2docker shellinit)
+    fi
+    command docker $@
+  }
+fi
+
 if [[ -f ~/.tmuxinator/tmuxinator.zsh ]]; then
   source ~/.tmuxinator/tmuxinator.zsh
 fi
