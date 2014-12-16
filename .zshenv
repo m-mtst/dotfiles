@@ -1,7 +1,8 @@
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 export GEM_HOME="$HOME/.gem/ruby/2.1.0"
-export LANG="ja_JP.UTF8"
+export LANG="ja_JP.UTF-8"
 export LC_ALL=$LANG
+export LC_CTYPE=$LANG
 export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8"
 export JRUBY_OPTS="--1.9"
 export EDITOR="vim"
