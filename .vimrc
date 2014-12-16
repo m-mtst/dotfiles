@@ -322,6 +322,7 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle "vim-scripts/taglist.vim"
+NeoBundle "leafgarland/typescript-vim"
 
 if neobundle#exists_not_installed_bundles()
    echomsg 'Not installed bundles : ' .
