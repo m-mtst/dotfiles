@@ -174,8 +174,9 @@ if [ `uname` != "Darwin" ]; then
       export SSH_AUTH_SOCK=$AGENT_SOCK_FILE
     fi
   else
-    test -f $SSH_AGENT_FILE && source $SSH_AGENT_FILE
-    if ! ssh-add -l >& /dev/null ; then
+    if [ -f $SSH_AGENT_FILE ] ; then
+      source $SSH_AGENT_FILE
+    else
       ssh-agent > $SSH_AGENT_FILE
       source $SSH_AGENT_FILE
       ssh-add
