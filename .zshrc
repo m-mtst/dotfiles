@@ -152,6 +152,13 @@ function crontab() {
   fi
 }
 
+# sshした時にwindow nameを変更
+function ssh() {
+  local window_name=$(tmux display -p '#{window_name}')
+  command ssh $@
+  tmux rename-window $window_name
+}
+
 if [ `uname` = "Darwin" ]; then
   function docker() {
     if [ ! -n "$DOCKER_HOST" ]; then
