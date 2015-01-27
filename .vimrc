@@ -226,11 +226,61 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets, ~/.vim
 " }}}
 
 " neobundle
-filetype off
+" Note: Skip initialization for vim-tiny or vim-small.
+if !1 | finish | endif
+
 if has('vim_starting')
+  " Required:
   set runtimepath+=~/.vim/bundle/neobundle.vim/
-  call neobundle#rc(expand('~/.vim/bundle/'))
 endif
+
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
+" NeoBundle {{{
+NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/neocomplcache.vim'
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'honza/vim-snippets'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'elzr/vim-json'
+NeoBundle 'tpope/vim-rails'
+"NeoBundle 'alpaca-tc/alpaca_tags'
+NeoBundle 'AndrewRadev/switch.vim'
+NeoBundle 'ConradIrwin/vim-bracketed-paste'
+NeoBundle "vim-scripts/taglist.vim"
+NeoBundle "leafgarland/typescript-vim"
+
+if neobundle#exists_not_installed_bundles()
+   echomsg 'Not installed bundles : ' .
+         \ string(neobundle#get_not_installed_bundle_names())
+   echomsg 'Please execute ":NeoBundleInstall" command.'
+endif
+filetype plugin indent on
+" }}}
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
 
 " Checking typo.
 " http://d.hatena.ne.jp/tyru/20130419/avoid_tyop （一部修正）
@@ -301,35 +351,6 @@ if has('iconv')
   unlet s:enc_euc
   unlet s:enc_jis
 endif
-" }}}
-
-" NeoBundle {{{
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'elzr/vim-json'
-NeoBundle 'tpope/vim-rails'
-"NeoBundle 'alpaca-tc/alpaca_tags'
-NeoBundle 'AndrewRadev/switch.vim'
-NeoBundle 'ConradIrwin/vim-bracketed-paste'
-NeoBundle "vim-scripts/taglist.vim"
-NeoBundle "leafgarland/typescript-vim"
-
-if neobundle#exists_not_installed_bundles()
-   echomsg 'Not installed bundles : ' .
-         \ string(neobundle#get_not_installed_bundle_names())
-   echomsg 'Please execute ":NeoBundleInstall" command.'
-endif
-filetype plugin indent on
 " }}}
 
 let g:syntastic_mode_map = { 'passive_filetypes': ['c'] }
