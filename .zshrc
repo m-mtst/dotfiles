@@ -1,6 +1,6 @@
 autoload -U colors
 colors
-autoload -U compinit
+autoload -Uz compinit
 compinit
 zstyle ':completion:*' list-colors "${LS_COLORS}" # 補完候補のカラー表示
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # 補完時に大文字小文字を区別しない
@@ -85,15 +85,19 @@ alias gd="git diff"
 alias gdt="gd trunk"
 alias gdm="gd master"
 alias gl="git log"
+alias glp="git log -p"
 alias gp="git pull --rebase"
 alias gr="git remote -v"
 alias be="bundle exec"
 alias py="python"
-alias ...="cd ../.."
-alias ....="cd ../../.."
+alias r=ruby
+alias p=python
+alias sl=ls
+
 alias -s txt=cat
 alias -s rb=ruby
 alias -s pl=perl
+alias -s py=python
 alias -s yml=vim
 alias -s git="git clone"
 
@@ -114,10 +118,6 @@ fi
 
 if which gpg > /dev/null 2>&1; then
   alias gpg="gpg2"
-fi
-
-if which git flow > /dev/null 2>&1; then
-  source ~/.git-flow-completion.zsh
 fi
 
 if which bundle > /dev/null 2>&1; then
@@ -190,5 +190,11 @@ if [ `uname` != "Darwin" ]; then
     fi
   fi
 fi
+
+source ~/.antigen.zsh
+
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen-bundle Tarrasch/zsh-bd
+antigen-bundle supercrabtree/k
 
 ls
