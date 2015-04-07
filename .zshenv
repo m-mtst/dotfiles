@@ -14,8 +14,9 @@ if [ ! "$LS_COLORS" -a -f /etc/DIR_COLORS ]; then
 fi
 
 path=(
-  $HOME/.gem/ruby/2.1.0/bin(N-/)
+  $HOME/.gem/ruby/2.2.0/bin(N-/)
   /usr/local/bin
-  $path
+  $PATH
   $HOME/ruby_trunk/bin(N-/)
+  $HOME/google-cloud-sdk/bin(N-/)
 )
