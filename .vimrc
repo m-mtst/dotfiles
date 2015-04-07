@@ -49,6 +49,7 @@ au BufNewFile,BufRead config.ru setf ruby
 au BufNewFile,BufRead insns.def setf c
 au BufNewFile,BufRead *.y setf c
 au BufNewFile,BufRead *.template setf json
+au BufNewFile,BufRead *.yml setf ansible
 au BufRead,BufNewFile,BufReadPre *.coffee setf coffee
 syntax enable
 highlight Pmenu ctermbg=4
@@ -264,6 +265,7 @@ NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle "vim-scripts/taglist.vim"
 NeoBundle "leafgarland/typescript-vim"
+NeoBundle "chase/vim-ansible-yaml"
 
 if neobundle#exists_not_installed_bundles()
    echomsg 'Not installed bundles : ' .
