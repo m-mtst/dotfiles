@@ -16,7 +16,7 @@ fi
 path=(
   $HOME/.gem/ruby/2.2.0/bin(N-/)
   /usr/local/bin
-  $PATH
+  $path
   $HOME/ruby_trunk/bin(N-/)
   $HOME/google-cloud-sdk/bin(N-/)
 )
