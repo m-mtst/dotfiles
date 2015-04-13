@@ -195,9 +195,8 @@ source ~/.antigen.zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen-bundle Tarrasch/zsh-bd
-antigen-bundle supercrabtree/k
 
 # The next line enables bash completion for gcloud.
-source '/Users/masaki/google-cloud-sdk/completion.zsh.inc'
+#source '/Users/masaki/google-cloud-sdk/completion.zsh.inc'
 
 ls
