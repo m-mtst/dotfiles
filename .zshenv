@@ -8,6 +8,7 @@ export JRUBY_OPTS="--1.9"
 export EDITOR="vim"
 export LESSCHARSET=utf-8 # Macでgit logした時の文字化け対策
 export GOPATH=$HOME/go
+export GOROOT=$GOPATH
 
 # $LS_COLORS
 if [ ! "$LS_COLORS" -a -f /etc/DIR_COLORS ]; then
