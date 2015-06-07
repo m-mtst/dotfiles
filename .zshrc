@@ -155,6 +155,7 @@ function crontab() {
 # sshした時にwindow nameを変更
 function ssh() {
   local window_name=$(tmux display -p '#{window_name}')
+  tmux rename-window $1
   command ssh $@
   tmux rename-window $window_name
 }
