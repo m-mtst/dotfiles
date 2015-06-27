@@ -8,6 +8,7 @@ export JRUBY_OPTS="--1.9"
 export EDITOR="vim"
 export LESSCHARSET=utf-8 # Macでgit logした時の文字化け対策
 export GOROOT=$HOME/go
+export GOPATH=$HOME/gopkg
 
 # $LS_COLORS
 if [ ! "$LS_COLORS" -a -f /etc/DIR_COLORS ]; then
@@ -17,6 +18,7 @@ fi
 path=(
   $HOME/.gem/ruby/2.2.0/bin(N-/)
   $GOROOT/bin(N-/)
+  $GOPATH/bin(N-/)
   /usr/local/bin
   $path
   $HOME/ruby_trunk/bin(N-/)

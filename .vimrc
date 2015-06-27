@@ -51,6 +51,7 @@ au BufNewFile,BufRead *.y setf c
 au BufNewFile,BufRead *.template setf json
 au BufNewFile,BufRead *.yml setf ansible
 au BufRead,BufNewFile,BufReadPre *.coffee setf coffee
+au BufRead,BufNewFile *.go setf go
 syntax enable
 highlight Pmenu ctermbg=4
 highlight PmenuSel ctermbg=1
@@ -266,6 +267,7 @@ NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle "vim-scripts/taglist.vim"
 NeoBundle "leafgarland/typescript-vim"
 NeoBundle "chase/vim-ansible-yaml"
+NeoBundle "fatih/vim-go"
 
 if neobundle#exists_not_installed_bundles()
    echomsg 'Not installed bundles : ' .
