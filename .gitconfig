@@ -13,7 +13,7 @@
 [push]
 	default = tracking
 [alias]
-  reamend = commit --amend -C HEAD
-  wdiff   = diff --word-diff
+  wdiff = diff --word-diff
 	apply = apply --whitespace=warn
 	rebase = rebase --whitespace=warn
+	rh = reset --hard
