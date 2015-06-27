@@ -56,6 +56,8 @@ syntax enable
 highlight Pmenu ctermbg=4
 highlight PmenuSel ctermbg=1
 highlight PMenuSbar ctermbg=4
+" ハイライトをESCで消す
+nnoremap <Esc><Esc> :<C-u>set nohlsearch<CR>
 noremap <Tab><Right> :tabnext<CR>
 noremap <Tab><Left> :tabprevious<CR>
 nnoremap <Home> ^
@@ -68,6 +70,7 @@ nnoremap f :VimFilerSplit -simple -winwidth=35 -toggle -force-quit<CR>
 nnoremap <C-]> g<C-]> 
 " 検索語が画面の真ん中に来るようにする
 nmap n nzz
+nmap c yygccp
 
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
@@ -203,8 +206,7 @@ augroup CRuby
 augroup END
 "}}}
 
-" ハイライトをESCで消す
-"nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>
+
 
 " neosnippet {{{
 " <TAB>: completion.                                         
@@ -254,7 +256,14 @@ NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+    \ 'windows' : 'make -f make_mingw32.mak',
+    \ 'cygwin' : 'make -f make_cygwin.mak',
+    \ 'mac' : 'make -f make_mac.mak',
+    \ 'unix' : 'make -f make_unix.mak',
+  \ },
+\ }
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kchmck/vim-coffee-script'
@@ -268,6 +277,7 @@ NeoBundle "vim-scripts/taglist.vim"
 NeoBundle "leafgarland/typescript-vim"
 NeoBundle "chase/vim-ansible-yaml"
 NeoBundle "fatih/vim-go"
+NeoBundle "tpope/vim-commentary"
 
 if neobundle#exists_not_installed_bundles()
    echomsg 'Not installed bundles : ' .
