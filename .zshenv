@@ -9,6 +9,7 @@ export EDITOR="vim"
 export LESSCHARSET=utf-8 # Macでgit logした時の文字化け対策
 export GOROOT=$HOME/go
 export GOPATH=$HOME/gopkg
+export RUBYGEMS_GEMDEPS="-" # http://qiita.com/ymmtmdk/items/374d5319e8d5c9ab2ff4
 
 # $LS_COLORS
 if [ ! "$LS_COLORS" -a -f /etc/DIR_COLORS ]; then
