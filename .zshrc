@@ -78,6 +78,12 @@ fi
 alias ll="ls -l"
 alias lhl="ls -hl"
 alias df="df -Th"
+alias r=ruby
+alias p=python
+alias sl=ls
+
+# git
+alias g="git"
 alias gs="git status"
 alias gc="git checkout"
 alias gb="git branch"
@@ -90,9 +96,6 @@ alias gp="git pull --rebase"
 alias gr="git remote -v"
 alias be="bundle exec"
 alias py="python"
-alias r=ruby
-alias p=python
-alias sl=ls
 
 alias -s txt=cat
 alias -s rb=ruby
@@ -100,6 +103,7 @@ alias -s pl=perl
 alias -s py=python
 alias -s yml=vim
 alias -s git="git clone"
+alias -s go="go run"
 
 if which pygmentize > /dev/null 2>&1; then
   alias ccat='pygmentize -O style=vim -f console256 -g' # colorized cat

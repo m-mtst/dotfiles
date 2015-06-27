@@ -16,4 +16,5 @@
   wdiff = diff --word-diff
 	apply = apply --whitespace=warn
 	rebase = rebase --whitespace=warn
+  co = commit
 	rh = reset --hard
