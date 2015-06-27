@@ -81,6 +81,8 @@ alias df="df -Th"
 alias r=ruby
 alias p=python
 alias sl=ls
+alias be="bundle exec"
+alias py="python"
 
 # git
 alias g="git"
@@ -88,14 +90,13 @@ alias gs="git status"
 alias gc="git checkout"
 alias gb="git branch"
 alias gd="git diff"
+alias gwd"git diff --word-diff"
 alias gdt="gd trunk"
 alias gdm="gd master"
 alias gl="git log"
 alias glp="git log -p"
 alias gp="git pull --rebase"
 alias gr="git remote -v"
-alias be="bundle exec"
-alias py="python"
 
 alias -s txt=cat
 alias -s rb=ruby
