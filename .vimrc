@@ -40,9 +40,6 @@ set incsearch
 set hlsearch
 set splitbelow
 set listchars=tab:>-,trail:-,nbsp:-,extends:>,precedes:<,
-set notimeout
-set ttimeout
-set timeoutlen=100
 
 setlocal formatoptions-=ro
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab textwidth=80 colorcolumn=80
@@ -61,7 +58,7 @@ highlight Pmenu ctermbg=4
 highlight PmenuSel ctermbg=1
 highlight PMenuSbar ctermbg=4
 " ハイライトをESCで消す
-nnoremap <Esc><Esc> :<C-u>set nohlsearch<CR>
+" nnoremap <Esc><Esc> :<C-u>set nohlsearch<CR>
 noremap <Tab><Right> :tabnext<CR>
 noremap <Tab><Left> :tabprevious<CR>
 nnoremap <Home> ^
