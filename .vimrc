@@ -39,6 +39,10 @@ set fileencoding=utf-8
 set incsearch
 set hlsearch
 set splitbelow
+set listchars=tab:>-,trail:-,nbsp:-,extends:>,precedes:<,
+set notimeout
+set ttimeout
+set timeoutlen=100
 
 setlocal formatoptions-=ro
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab textwidth=80 colorcolumn=80
