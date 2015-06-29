@@ -70,6 +70,7 @@ alias tk="tmux kill-session -t"
 alias vim="vim -p"
 alias vi="vim"
 alias iv="vi"
+alias v="vi"
 if [ `uname` = "Darwin" ]; then
   alias ls="ls -vG"
 else
@@ -200,8 +201,5 @@ source ~/.antigen.zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen-bundle Tarrasch/zsh-bd
-
-# The next line enables bash completion for gcloud.
-#source '/Users/masaki/google-cloud-sdk/completion.zsh.inc'
 
 ls
