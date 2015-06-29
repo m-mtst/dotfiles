@@ -113,39 +113,6 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 "}}}
 
-" 挿入モード時、ステータスラインの色を変更 {{{
-let g:hi_insert = 'highlight StatusLine ctermfg=white ctermbg=blue cterm=none'
-
-if has('syntax')
-  augroup InsertHook
-    autocmd!
-    autocmd InsertEnter * call s:StatusLine('Enter')
-    autocmd InsertLeave * call s:StatusLine('Leave')
-  augroup END
-endif
-
-let s:slhlcmd = ''
-function! s:StatusLine(mode)
-  if a:mode == 'Enter'
-    silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
-    silent exec g:hi_insert
-  else
-    highlight clear StatusLine
-    silent exec s:slhlcmd
-  endif
-endfunction
-
-function! s:GetHighlight(hi)
-  redir => hl
-  exec 'highlight '.a:hi
-  redir END
-  let hl = substitute(hl, '[\r\n]', '', 'g')
-  let hl = substitute(hl, 'xxx', '', '')
-  return hl
-endfunction
-"}}}
-
-
 " CRuby関連 {{{
 function! s:CRuby_setup()
   setlocal tabstop=8 softtabstop=4 shiftwidth=4 noexpandtab
@@ -206,8 +173,6 @@ augroup CRuby
   autocmd BufWinEnter,BufNewFile *.{c,cc,cpp,h,hh,hpp} call s:CRuby_ext_setup()
 augroup END
 "}}}
-
-
 
 " neosnippet {{{
 " <TAB>: completion.                                         
@@ -279,6 +244,7 @@ NeoBundle "leafgarland/typescript-vim"
 NeoBundle "chase/vim-ansible-yaml"
 NeoBundle "fatih/vim-go"
 NeoBundle "tpope/vim-commentary"
+NeoBundle "bling/vim-airline"
 
 if neobundle#exists_not_installed_bundles()
    echomsg 'Not installed bundles : ' .
@@ -322,50 +288,6 @@ endfunction
 "
 "    inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 "endif
-" }}}
-
-" 文字コードの自動認識 {{{
-" http://www.kawaz.jp/pukiwiki/?vim#content_1_7
-if &encoding !=# 'utf-8'
-  set encoding=japan
-  set fileencoding=japan
-endif
-if has('iconv')
-  let s:enc_euc = 'euc-jp'
-  let s:enc_jis = 'iso-2022-jp'
-  " iconvがeucJP-msに対応しているかをチェック
-  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'eucjp-ms'
-    let s:enc_jis = 'iso-2022-jp-3'
-  " iconvがJISX0213に対応しているかをチェック
-  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213'
-    let s:enc_jis = 'iso-2022-jp-3'
-  endif
-  " fileencodingsを構築
-  if &encoding ==# 'utf-8'
-    let s:fileencodings_default = &fileencodings
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = s:fileencodings_default .','. &fileencodings
-    unlet s:fileencodings_default
-  else
-    let &fileencodings = &fileencodings .','. s:enc_jis
-    set fileencodings+=utf-8,ucs-2le,ucs-2
-    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-      set fileencodings+=cp932
-      set fileencodings-=euc-jp
-      set fileencodings-=euc-jisx0213
-      set fileencodings-=eucjp-ms
-      let &encoding = s:enc_euc
-      let &fileencoding = s:enc_euc
-    else
-      let &fileencodings = &fileencodings .','. s:enc_euc
-    endif
-  endif
-  " 定数を処分
-  unlet s:enc_euc
-  unlet s:enc_jis
-endif
 " }}}
 
 let g:syntastic_mode_map = { 'passive_filetypes': ['c'] }
