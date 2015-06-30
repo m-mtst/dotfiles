@@ -24,7 +24,7 @@ setopt extended_history   # ヒストリに実行時間も保存する
 setopt rm_star_wait # 10 秒間反応しなくなり、頭を冷ます時間が与えられる
 
 # cdのたびにls
-if [ `uname` = "Darwin" ]; then
+if [[ `uname` = "Darwin" ]]; then
   function chpwd() { gls --color=auto }
 else
   function chpwd() { ls --color=auto }
@@ -35,7 +35,6 @@ SAVEHIST=100
 
 PROMPT="%B%(?.%F{green}.%F{red})%~%#%f%b "
 PROMPT2="%_%%"
-SPROMPT="%r is correct? [n,y,a,e]: "
 
 # http://d.hatena.ne.jp/mollifier/20090814/p1
 autoload -Uz vcs_info
@@ -143,11 +142,11 @@ function root() {
 
 # crontabの-eを禁止, -rは確認を強制
 function crontab() {
-  if [ $1 = -e ]; then
+  if [[ $1 = -e ]]; then
     echo "\"crontab -e\" is dangerous and strictly prohibited."
     echo "Use \"crontab file\"."
     return 1
-  elif [ $1 = -r ]; then
+  elif [[ $1 = -r ]]; then
     command crontab -ri
   else
     command crontab $@
@@ -161,9 +160,9 @@ function ssh() {
   tmux rename-window $window_name
 }
 
-if [ `uname` = "Darwin" ]; then
+if [[ `uname` = "Darwin" ]]; then
   function docker() {
-    if [ ! -n "$DOCKER_HOST" ]; then
+    if [[ ! -n "$DOCKER_HOST" ]]; then
       $(boot2docker shellinit)
     fi
     command docker $@
@@ -174,16 +173,16 @@ if [[ -f ~/.tmuxinator/tmuxinator.zsh ]]; then
   source ~/.tmuxinator/tmuxinator.zsh
 fi
 
-if [ `uname` != "Darwin" ]; then
+if [[ `uname` != "Darwin" ]]; then
   AGENT_SOCK_FILE="/tmp/ssh-agent-$USER"
   SSH_AGENT_FILE="$HOME/.ssh-agent-info"
   if test $SSH_AUTH_SOCK ; then
-    if [ $SSH_AUTH_SOCK != $AGENT_SOCK_FILE ] ; then
+    if [[ $SSH_AUTH_SOCK != $AGENT_SOCK_FILE ]] ; then
       ln -sf $SSH_AUTH_SOCK $AGENT_SOCK_FILE
       export SSH_AUTH_SOCK=$AGENT_SOCK_FILE
     fi
   else
-    if [ -f $SSH_AGENT_FILE ] ; then
+    if [[ -f $SSH_AGENT_FILE ]]; then
       source $SSH_AGENT_FILE
     else
       ssh-agent > $SSH_AGENT_FILE
@@ -193,14 +192,18 @@ if [ `uname` != "Darwin" ]; then
   fi
 fi
 
-if [ `uname` = "Darwin" ]; then
-  if [ -e "$HOME/Downloads/dircolors-solarized" ]; then
+if [[ `uname` = "Darwin" ]]; then
+  if [[ -e "$HOME/Downloads/dircolors-solarized" ]]; then
     eval $(gdircolors $HOME/Downloads/dircolors-solarized/dircolors.ansi-universal)
   fi
 else
-  if [ -e "$HOME/download/dircolors-solarized" ]; then
+  if [[ -e "$HOME/download/dircolors-solarized" ]]; then
     eval $(dircolors $HOME/download/dircolors-solarized/dircolors.ansi-universal)
   fi
+fi
+
+if [[ -n "$LS_COLORS" ]]; then
+  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 fi
 
 source ~/.antigen.zsh
