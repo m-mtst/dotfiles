@@ -22,6 +22,7 @@ setopt list_types # 補完候補一覧でファイルの種別を識別マーク
 setopt magic_equal_subst # =以降も補完する(--prefix=/usrなど)
 setopt extended_history   # ヒストリに実行時間も保存する
 setopt rm_star_wait # 10 秒間反応しなくなり、頭を冷ます時間が与えられる
+typeset -U path # $PATHの重複排除
 
 # cdのたびにls
 if [[ `uname` = "Darwin" ]]; then
