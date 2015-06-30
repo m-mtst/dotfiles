@@ -25,11 +25,7 @@ setopt rm_star_wait # 10 秒間反応しなくなり、頭を冷ます時間が�
 
 # cdのたびにls
 if [ `uname` = "Darwin" ]; then
-  function chpwd() {
-    # tmuxのカレントディレクトリ設定: http://filmlang.org/2011/05/12/tmux/setting
-    [ -n $TMUX ] && tmux setenv TMUXPWD_$(tmux display -p "#I") $PWD
-    ls -vG
-  }
+  function chpwd() { gls --color=auto }
 else
   function chpwd() { ls --color=auto }
 fi
@@ -72,7 +68,7 @@ alias vi="vim"
 alias iv="vi"
 alias v="vi"
 if [ `uname` = "Darwin" ]; then
-  alias ls="ls -vG"
+  alias ls="gls --color=auto"
 else
   alias ls="ls --color=auto"
 fi
@@ -194,6 +190,16 @@ if [ `uname` != "Darwin" ]; then
       source $SSH_AGENT_FILE
       ssh-add
     fi
+  fi
+fi
+
+if [ `uname` = "Darwin" ]; then
+  if [ -e "$HOME/Downloads/dircolors-solarized" ]; then
+    eval $(gdircolors $HOME/Downloads/dircolors-solarized/dircolors.ansi-universal)
+  fi
+else
+  if [ -e "$HOME/download/dircolors-solarized" ]; then
+    eval $(dircolors $HOME/download/dircolors-solarized/dircolors.ansi-universal)
   fi
 fi
 
