@@ -222,21 +222,12 @@ NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-    \ 'windows' : 'make -f make_mingw32.mak',
-    \ 'cygwin' : 'make -f make_cygwin.mak',
-    \ 'mac' : 'make -f make_mac.mak',
-    \ 'unix' : 'make -f make_unix.mak',
-  \ },
-\ }
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'tpope/vim-rails'
-"NeoBundle 'alpaca-tc/alpaca_tags'
 NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle "vim-scripts/taglist.vim"
@@ -245,6 +236,23 @@ NeoBundle "chase/vim-ansible-yaml"
 NeoBundle "fatih/vim-go"
 NeoBundle "tpope/vim-commentary"
 NeoBundle "bling/vim-airline"
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+    \ 'windows' : 'make -f make_mingw32.mak',
+    \ 'cygwin' : 'make -f make_cygwin.mak',
+    \ 'mac' : 'make -f make_mac.mak',
+    \ 'unix' : 'make -f make_unix.mak',
+  \ },
+\ }
+NeoBundleLazy 'alpaca-tc/alpaca_tags', {
+\ 'depends': ['Shougo/vimproc'],
+\ 'autoload' : {
+\   'commands' : [
+\     { 'name' : 'AlpacaTagsBundle', 'complete': 'customlist,alpaca_tags#complete_source' },
+\     { 'name' : 'AlpacaTagsUpdate', 'complete': 'customlist,alpaca_tags#complete_source' },
+\     'AlpacaTagsSet', 'AlpacaTagsCleanCache', 'AlpacaTagsEnable', 'AlpacaTagsDisable', 'AlpacaTagsKillProcess', 'AlpacaTagsProcessStatus',
+\ ],
+\ }}
 
 if neobundle#exists_not_installed_bundles()
    echomsg 'Not installed bundles : ' .
@@ -320,15 +328,19 @@ let g:quickrun_config={
 \  }
 \}
 
-"augroup AlpacaTags
-"  autocmd!
-"  if exists(':AlpacaTags')
-"    autocmd BufWritePost Gemfile TagsBundle
-"    autocmd BufEnter * TagsSet
-"    " 毎回保存と同時更新する場合はコメントを外す
-"    " autocmd BufWritePost * TagsUpdate
-"  endif
-"augroup END
+let g:alpaca_tags#config = {
+                       \    '_' : '-R --sort=yes',
+                       \    'ruby': '--languages=+Ruby',
+                       \ }
+
+augroup AlpacaTags
+  autocmd!
+  if exists(':AlpacaTags')
+    autocmd BufWritePost Gemfile AlpacaTagsBundle
+    autocmd BufEnter * AlpacaTagsSet
+    autocmd BufWritePost * AlpacaTagsUpdate
+  endif
+augroup END
 
 set tags=tags
 let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
