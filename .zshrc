@@ -35,7 +35,6 @@ HISTSIZE=100
 SAVEHIST=100
 
 PROMPT="%B%(?.%F{green}.%F{red})%~%#%f%b "
-PROMPT2="%_%%"
 
 # http://d.hatena.ne.jp/mollifier/20090814/p1
 autoload -Uz vcs_info
@@ -47,7 +46,7 @@ precmd () {
     LANG=en_US.UTF-8 vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
-RPROMPT="%1(v|%F{green}%1v%f|)"
+RPROMPT="%F{green}%1(v|%1v|)@${HOST}%f"
 
 bindkey -d
 bindkey '\e[1~' beginning-of-line #Home,Endキーを動作させる
