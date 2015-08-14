@@ -79,6 +79,7 @@ alias p=python
 alias sl=ls
 alias be="bundle exec"
 alias py="python"
+alias diff="diff -u" # unified format
 
 # git
 alias g="git"
