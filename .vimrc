@@ -70,6 +70,7 @@ nnoremap s :Switch<CR>
 nnoremap f :VimFilerSplit -simple -winwidth=35 -toggle -force-quit<CR>
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]> 
+nnoremap p "0p
 " 検索語が画面の真ん中に来るようにする
 nmap n nzz
 nmap c yygccp
