@@ -111,7 +111,7 @@ if which apt-get > /dev/null 2>&1; then
   alias as="apt-cache search"
   alias ai="sudo apt-get install"
   alias ar="sudo apt-get autoremove"
-  alias au="sudo apt-get update && sudo apt-get dist-upgrade && ar"
+  alias au="sudo apt-get update && sudo apt-get dist-upgrade && ar -y"
 fi
 
 if which htop > /dev/null 2>&1; then
