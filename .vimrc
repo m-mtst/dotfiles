@@ -46,6 +46,7 @@ set noerrorbells
 set display=lastline " 長い行を表示
 set showmatch " 対応する括弧に一瞬カーソルを飛ばす
 set matchtime=1 " カーソルを飛ばす時間(0.1秒)
+set splitright
 
 setlocal formatoptions-=ro
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab textwidth=80 colorcolumn=80
@@ -64,25 +65,24 @@ syntax enable
 highlight Pmenu ctermbg=4
 highlight PmenuSel ctermbg=1
 highlight PMenuSbar ctermbg=4
-" ハイライトをESCで消す
-" nnoremap <Esc><Esc> :<C-u>set nohlsearch<CR>
 noremap <Tab><Right> :tabnext<CR>
 noremap <Tab><Left> :tabprevious<CR>
 nnoremap <Home> ^
-nnoremap :tn :tabnew<CR>
 nnoremap :te :tabedit
 nnoremap :to :tabonly<CR>
+nnoremap :Q :tabonly<Bar>q
 nnoremap s :Switch<CR>
 nnoremap f :VimFilerSplit -simple -winwidth=35 -toggle -force-quit<CR>
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]> 
-nnoremap p "0p
 nnoremap Y y$
 nnoremap + <C-a>
 nnoremap - <C-x>
-" 検索語が画面の真ん中に来るようにする
-nmap n nzz
-nmap c yygccp
+nnoremap <Bar> :vsplit<CR>
+"nnoremap p "0p
+nnoremap dd "_dd
+nmap n nzz " 検索語が画面の真ん中に来るようにする
+"nmap c yygccp
 
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
@@ -293,22 +293,6 @@ function! s:write_check_typo(file)
     endif
 endfunction
 
-" Bracketed Paste Modeを有効にする {{{
-" http://ttssh2.sourceforge.jp/manual/ja/usage/tips/vim.html
-"if &term =~ "xterm"
-"    let &t_SI .= "\e[?2004h"
-"    let &t_EI .= "\e[?2004l"
-"    let &pastetoggle = "\e[201~"
-"
-"    function XTermPasteBegin(ret)
-"        set paste
-"        return a:ret
-"    endfunction
-"
-"    inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
-"endif
-" }}}
-
 let g:syntastic_mode_map = { 'passive_filetypes': ['c'] }
 
 let g:changelog_timeformat = "%a %b %e %T %Y"
@@ -329,15 +313,6 @@ let g:neocomplcache_force_overwrite_completefunc=1 " vim-railsの補完を上書
 let g:vim_json_syntax_conceal = 0 " vim-jsonでconcealをしない
 let g:vimfiler_as_default_explorer = 1 " :e . で VimFiler が起動するようになる
 let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに変更
-
-" 横分割をするようにする
-let g:quickrun_config={
-\  '_': {
-\    'split': '20',
-\    'outputter/buffer/close_on_empty': 1,
-\    'outputter/buffer/into': 1
-\  }
-\}
 
 let g:alpaca_tags#config = {
                        \    '_' : '-R --sort=yes',
