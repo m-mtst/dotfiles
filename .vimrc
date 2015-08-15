@@ -1,3 +1,4 @@
+scriptencoding utf-8
 set nocompatible
 "set number " 行番号表示
 set clipboard=autoselect
@@ -40,6 +41,11 @@ set incsearch
 set hlsearch
 set splitbelow
 set listchars=tab:>-,trail:-,nbsp:-,extends:>,precedes:<,
+set visualbell
+set noerrorbells
+set display=lastline " 長い行を表示
+set showmatch " 対応する括弧に一瞬カーソルを飛ばす
+set matchtime=1 " カーソルを飛ばす時間(0.1秒)
 
 setlocal formatoptions-=ro
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab textwidth=80 colorcolumn=80
@@ -71,6 +77,9 @@ nnoremap f :VimFilerSplit -simple -winwidth=35 -toggle -force-quit<CR>
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]> 
 nnoremap p "0p
+nnoremap Y y$
+nnoremap + <C-a>
+nnoremap - <C-x>
 " 検索語が画面の真ん中に来るようにする
 nmap n nzz
 nmap c yygccp
