@@ -81,6 +81,7 @@ nnoremap - <C-x>
 nnoremap <Bar> :vsplit<CR>
 "nnoremap p "0p
 nnoremap dd "_dd
+nmap # gcc
 nmap n nzz " 検索語が画面の真ん中に来るようにする
 "nmap c yygccp
 
