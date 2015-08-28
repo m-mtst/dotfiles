@@ -50,7 +50,7 @@ set splitright
 
 setlocal formatoptions-=ro
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab textwidth=80 colorcolumn=80
-au FileType python setl textwidth=80 colorcolumn=80
+au FileType python setl shiftwidth=4 softtabstop=4 textwidth=80 colorcolumn=80
 au BufNewFile,BufRead Rakefile setf ruby
 au BufNewFile,BufRead Capfile setf ruby
 au BufNewFile,BufRead Berksfile setf ruby
