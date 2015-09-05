@@ -1,6 +1,6 @@
 scriptencoding utf-8
 set nocompatible
-"set number " 行番号表示
+set number
 set clipboard=unnamed
 set includeexpr=''
 set pastetoggle=<F12>
@@ -47,6 +47,14 @@ set display=lastline " 長い行を表示
 set showmatch " 対応する括弧に一瞬カーソルを飛ばす
 set matchtime=1 " カーソルを飛ばす時間(0.1秒)
 set splitright
+
+" Powerline
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+set laststatus=2
+"set showtabline=2
+"set noshowmode
 
 setlocal formatoptions-=ro
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab textwidth=80 colorcolumn=80
@@ -247,7 +255,6 @@ NeoBundle "leafgarland/typescript-vim"
 NeoBundle "chase/vim-ansible-yaml"
 NeoBundle "fatih/vim-go"
 NeoBundle "tpope/vim-commentary"
-NeoBundle "bling/vim-airline"
 NeoBundle 'Shougo/vimproc', {
   \ 'build' : {
     \ 'windows' : 'make -f make_mingw32.mak',
