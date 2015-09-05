@@ -1,7 +1,7 @@
 scriptencoding utf-8
 set nocompatible
 "set number " 行番号表示
-set clipboard=autoselect
+set clipboard=unnamed
 set includeexpr=''
 set pastetoggle=<F12>
 set autoindent
