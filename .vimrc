@@ -54,16 +54,13 @@ colorscheme hybrid
 
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab textwidth=80 colorcolumn=80
 au FileType python setl shiftwidth=4 softtabstop=4 textwidth=80 colorcolumn=80
+au FileType ruby setl iskeyword+=? " ?を含む識別子もひと続きで扱えるように
 au BufNewFile,BufRead Rakefile,Capfile,Berksfile,config.ru setf ruby
 au BufNewFile,BufRead insns.def,*.y setf c
 au BufNewFile,BufRead *.template setf json
 au BufNewFile,BufRead *.yml setf ansible
 au BufRead,BufNewFile,BufReadPre *.coffee setf coffee
 au BufRead,BufNewFile *.go setf go
-
-" highlight Pmenu ctermbg=4
-" highlight PmenuSel ctermbg=1
-" highlight PMenuSbar ctermbg=4
 
 noremap <Tab><Right> :tabnext<CR>
 noremap <Tab><Left> :tabprevious<CR>
@@ -237,15 +234,15 @@ NeoBundle 'Shougo/vimproc', {
     \ 'unix' : 'make -f make_unix.mak',
   \ },
 \ }
-NeoBundleLazy 'alpaca-tc/alpaca_tags', {
-              \ 'depends': ['Shougo/vimproc'],
-              \ 'autoload' : {
-              \   'commands' : [
-              \     { 'name' : 'AlpacaTagsBundle', 'complete': 'customlist,alpaca_tags#complete_source' },
-              \     { 'name' : 'AlpacaTagsUpdate', 'complete': 'customlist,alpaca_tags#complete_source' },
-              \     'AlpacaTagsSet', 'AlpacaTagsCleanCache', 'AlpacaTagsEnable', 'AlpacaTagsDisable', 'AlpacaTagsKillProcess', 'AlpacaTagsProcessStatus',
-              \ ],
-              \ }}
+"NeoBundleLazy 'alpaca-tc/alpaca_tags', {
+"              \ 'depends': ['Shougo/vimproc'],
+"              \ 'autoload' : {
+"              \   'commands' : [
+"              \     { 'name' : 'AlpacaTagsBundle', 'complete': 'customlist,alpaca_tags#complete_source' },
+"              \     { 'name' : 'AlpacaTagsUpdate', 'complete': 'customlist,alpaca_tags#complete_source' },
+"              \     'AlpacaTagsSet', 'AlpacaTagsCleanCache', 'AlpacaTagsEnable', 'AlpacaTagsDisable', 'AlpacaTagsKillProcess', 'AlpacaTagsProcessStatus',
+"              \ ],
+"              \ }}
 
 call neobundle#end()
 
@@ -286,20 +283,20 @@ let g:vim_json_syntax_conceal = 0 " vim-jsonでconcealをしない
 let g:vimfiler_as_default_explorer = 1 " :e . で VimFiler が起動するようになる
 let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに変更
 
-let g:alpaca_tags#config = {
-\    '_' : '-R --sort=yes',
-\    'ruby': '--languages=+Ruby',
-\    'c': '--languages=+c',
-\ }
-
-augroup AlpacaTags
-  autocmd!
-  if exists(':AlpacaTags')
-    autocmd BufWritePost Gemfile AlpacaTagsBundle
-    autocmd BufEnter * AlpacaTagsSet
-    autocmd BufWritePost * AlpacaTagsUpdate
-  endif
-augroup END
+"let g:alpaca_tags#config = {
+"\    '_' : '-R --sort=yes',
+"\    'ruby': '--languages=+Ruby',
+"\    'c': '--languages=+c',
+"\ }
+"
+"augroup AlpacaTags
+"  autocmd!
+"  if exists(':AlpacaTags')
+"    autocmd BufWritePost Gemfile AlpacaTagsBundle
+"    autocmd BufEnter * AlpacaTagsSet
+"    autocmd BufWritePost * AlpacaTagsUpdate
+"  endif
+"augroup END
 
 "set tags=tags
 "let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
