@@ -61,7 +61,6 @@ alias tmux="tmux -2 -u"
 alias tl="tmux ls"
 alias tn="tmux new -s"
 alias ta="tmux a -d -t"
-alias tk="tmux kill-session -t"
 alias vim="vim -p"
 alias vi="vim"
 alias iv="vi"
@@ -79,7 +78,6 @@ alias p=python
 alias sl=ls
 alias be="bundle exec"
 alias py="python"
-alias diff="diff -u" # unified format
 
 # git
 alias g="git"
@@ -102,6 +100,12 @@ alias -s py=python
 alias -s yml=vim
 alias -s git="git clone"
 alias -s go="go run"
+
+if which apt-get > /dev/null 2>&1; then
+  alias diff="colordiff -u" # unified format
+else
+  alias diff="diff -u" # unified format
+fi 
 
 if which pygmentize > /dev/null 2>&1; then
   alias ccat='pygmentize -O style=vim -f console256 -g' # colorized cat
@@ -141,6 +145,11 @@ function root() {
   fi
 }
 
+function we() {
+  wget $1
+  tar -xvf $(basename $1)
+}
+
 # crontabの-eを禁止, -rは確認を強制
 function crontab() {
   if [[ $1 = -e ]]; then
@@ -152,13 +161,6 @@ function crontab() {
   else
     command crontab $@
   fi
-}
-
-# sshした時にwindow nameを元に戻す
-function ssh() {
-  local window_name=$(tmux display -p '#{window_name}')
-  command ssh $@
-  tmux rename-window $window_name
 }
 
 if [[ `uname` = "Darwin" ]]; then
