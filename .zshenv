@@ -16,6 +16,7 @@ path=(
   $GOROOT/bin(N-/)
   $GOPATH/bin(N-/)
   $HOME/.gem/ruby/2.2.0/bin(N-/)
+  $HOME/.gem/ruby/2.3.0/bin(N-/)
   #/usr/local/bin
   $path
   $HOME/ruby_trunk/bin(N-/)
