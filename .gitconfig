@@ -11,7 +11,7 @@
 	autocrlf = input
 	whitespace = trailing-space,space-before-tab
 [push]
-	default = tracking
+	default = current
 [alias]
 	apply = apply --whitespace=warn
 	rebase = rebase --whitespace=warn

@@ -69,12 +69,10 @@ nnoremap :te :tabedit
 nnoremap :to :tabonly
 nnoremap :Q :tabonly<Bar>q
 nnoremap s :Switch<CR>
-nnoremap f :VimFilerSplit -simple -winwidth=35 -toggle -force-quit<CR>
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]> 
 nnoremap Y y$
-nnoremap + <C-a>
-nnoremap - <C-x>
+nnoremap - :split<CR>
 nnoremap <Bar> :vsplit<CR>
 nnoremap dd "_dd
 nmap # gcc
@@ -100,6 +98,11 @@ augroup BinaryXXD
   autocmd BufWritePre * if &binary | %!xxd -r | endif
   autocmd BufWritePost * if &binary | silent %!xxd -g 1
   autocmd BufWritePost * set nomod | endif
+augroup END
+
+augroup cruby
+  autocmd!
+  autocmd BufWinEnter,BufNewFile ~/download/ruby/**.[chy] setlocal filetype=cruby
 augroup END
 
 " <TAB>で補完
@@ -211,8 +214,8 @@ NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tpope/vim-endwise'
@@ -243,6 +246,7 @@ NeoBundle 'Shougo/vimproc', {
 "              \     'AlpacaTagsSet', 'AlpacaTagsCleanCache', 'AlpacaTagsEnable', 'AlpacaTagsDisable', 'AlpacaTagsKillProcess', 'AlpacaTagsProcessStatus',
 "              \ ],
 "              \ }}
+NeoBundle 'mrkn/vim-cruby'
 
 call neobundle#end()
 
@@ -264,10 +268,6 @@ endfunction
 
 let g:syntastic_mode_map = { 'passive_filetypes': ['c'] }
 
-let g:changelog_timeformat = "%a %b %e %T %Y"
-"let g:changelog_username = system("git config -z user.name") . " <" . system("git config -z user.email") . ">"
-let g:changelog_username = "Masaki Matsushita <glass.saga@gmail.com>"
-
 " neocomplcache {{{
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_quick_match = 0
@@ -280,8 +280,14 @@ let g:neocomplcache_force_overwrite_completefunc=1 " vim-railsの補完を上書
 " }}}
 
 let g:vim_json_syntax_conceal = 0 " vim-jsonでconcealをしない
-let g:vimfiler_as_default_explorer = 1 " :e . で VimFiler が起動するようになる
-let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに変更
+
+let NERDTreeShowHidden=1
+" ブックマークを表示 (1:表示)
+let g:NERDTreeShowBookmarks=1
+" 引数なしで起動した場合、NERDTreeを開く
+autocmd vimenter * if !argc() | NERDTree | endif
+" 表示・非表示切り替え
+nnoremap <silent><C-t> :NERDTreeToggle<CR>
 
 "let g:alpaca_tags#config = {
 "\    '_' : '-R --sort=yes',
