@@ -51,7 +51,7 @@ RPROMPT="%F{green}%1(v|%1v|)@${HOST}%f"
 bindkey -d
 bindkey '\e[1~' beginning-of-line #Home,Endキーを動作させる
 bindkey '\e[4~' end-of-line 
-bindkey '^h' _history-complete-older
+#bindkey '^h' zaw-history
 
 alias cp="cp -i"
 alias rm="rm -i"
@@ -63,7 +63,6 @@ alias tn="tmux new -s"
 alias ta="tmux a -d -t"
 alias vim="vim -p"
 alias vi="vim"
-alias iv="vi"
 alias v="vi"
 if [ `uname` = "Darwin" ]; then
   alias ls="gls --color=auto"
@@ -78,6 +77,11 @@ alias p=python
 alias sl=ls
 alias be="bundle exec"
 alias py="python"
+
+# typo
+alias eixt="exit"
+alias exti="exit"
+alias iv="vi"
 
 # git
 alias g="git"
@@ -122,10 +126,6 @@ if which htop > /dev/null 2>&1; then
   alias top="htop"
 fi
 
-if which gpg > /dev/null 2>&1; then
-  alias gpg="gpg2"
-fi
-
 if which bundle > /dev/null 2>&1; then
   alias jbundle="jruby -S bundle"
 fi
@@ -162,15 +162,6 @@ function crontab() {
     command crontab $@
   fi
 }
-
-if [[ `uname` = "Darwin" ]]; then
-  function docker() {
-    if [[ ! -n "$DOCKER_HOST" ]]; then
-      $(boot2docker shellinit)
-    fi
-    command docker $@
-  }
-fi
 
 if [[ -f ~/.tmuxinator/tmuxinator.zsh ]]; then
   source ~/.tmuxinator/tmuxinator.zsh

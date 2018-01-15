@@ -55,12 +55,12 @@ colorscheme hybrid
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab textwidth=80 colorcolumn=80
 au FileType python setl shiftwidth=4 softtabstop=4 textwidth=80 colorcolumn=80
 au FileType ruby setl iskeyword+=? " ?を含む識別子もひと続きで扱えるように
+au FileType ansible setl shiftwidth=2 softtabstop=2
 au BufNewFile,BufRead Rakefile,Capfile,Berksfile,config.ru setf ruby
 au BufNewFile,BufRead insns.def,*.y setf c
 au BufNewFile,BufRead *.template setf json
 au BufNewFile,BufRead *.yml setf ansible
 au BufRead,BufNewFile,BufReadPre *.coffee setf coffee
-au BufRead,BufNewFile *.go setf go
 
 noremap <Tab><Right> :tabnext<CR>
 noremap <Tab><Left> :tabprevious<CR>
