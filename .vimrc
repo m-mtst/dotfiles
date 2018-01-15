@@ -4,7 +4,6 @@ set number
 set cursorline " カーソル行強調
 set clipboard=unnamed
 set includeexpr=''
-set pastetoggle=<F12>
 set autoindent
 set smartindent  " 新しい行を開始したときに、新しい行のインデントを現在行と同じ量にする。
 set tabstop=2
@@ -29,7 +28,6 @@ set showcmd                      " コマンドをステータス行に表示
 set ttyfast                      " 高速ターミナル接続を行う
 set lazyredraw
 set nrformats-=octal             " 先頭に0がある数字でも10進数とみなす
-set t_Co=256                     " 256色
 set wildmenu                     " ファイル名補完
 set wildmode=list:longest        " マッチするものをリスト表示しつつ、共通する最長の部分まで補完
 set wildignore=.git,.svn,*.jpg,*.jpeg,*.bmp,*.gif,*.png,*.o,*.so,*.out,*.exe,*.dll,*.swp,*.bak,*.old,*.tmp,*.DS_Store
@@ -54,9 +52,9 @@ colorscheme hybrid
 
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab textwidth=80 colorcolumn=80
 au FileType python setl shiftwidth=4 softtabstop=4 textwidth=80 colorcolumn=80
-au FileType ruby setl iskeyword+=? " ?を含む識別子もひと続きで扱えるように
+au FileType ruby setl ts=2 shiftwidth=2 softtabstop=2 expandtab iskeyword+=? " ?を含む識別子もひと続きで扱えるように
 au BufNewFile,BufRead Rakefile,Capfile,Berksfile,config.ru setf ruby
-au BufNewFile,BufRead insns.def,*.y setf c
+au BufNewFile,BufRead insns.def setf cruby
 au BufNewFile,BufRead *.template setf json
 au BufNewFile,BufRead *.yml setf ansible
 au BufRead,BufNewFile,BufReadPre *.coffee setf coffee
@@ -196,63 +194,66 @@ if has('conceal')
 endif
 " }}}
 
-" NeoBundle {{{
-" Note: Skip initialization for vim-tiny or vim-small.
-if !1 | finish | endif
-
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
-call neobundle#begin(expand('~/.vim/bundle/'))
+" Required:
+set runtimepath+=/home/masaki/.vim/bundles/repos/github.com/Shougo/dein.vim
 
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
+" Required:
+if dein#load_state('/home/masaki/.vim/bundles')
+  call dein#begin('/home/masaki/.vim/bundles')
 
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'elzr/vim-json'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'AndrewRadev/switch.vim'
-NeoBundle 'ConradIrwin/vim-bracketed-paste'
-NeoBundle 'vim-scripts/taglist.vim'
-NeoBundle 'leafgarland/typescript-vim'
-NeoBundle 'chase/vim-ansible-yaml'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-    \ 'windows' : 'make -f make_mingw32.mak',
-    \ 'cygwin' : 'make -f make_cygwin.mak',
-    \ 'mac' : 'make -f make_mac.mak',
-    \ 'unix' : 'make -f make_unix.mak',
-  \ },
-\ }
-"NeoBundleLazy 'alpaca-tc/alpaca_tags', {
-"              \ 'depends': ['Shougo/vimproc'],
-"              \ 'autoload' : {
-"              \   'commands' : [
-"              \     { 'name' : 'AlpacaTagsBundle', 'complete': 'customlist,alpaca_tags#complete_source' },
-"              \     { 'name' : 'AlpacaTagsUpdate', 'complete': 'customlist,alpaca_tags#complete_source' },
-"              \     'AlpacaTagsSet', 'AlpacaTagsCleanCache', 'AlpacaTagsEnable', 'AlpacaTagsDisable', 'AlpacaTagsKillProcess', 'AlpacaTagsProcessStatus',
-"              \ ],
-"              \ }}
-NeoBundle 'mrkn/vim-cruby'
+  " Let dein manage dein
+  " Required:
+  call dein#add('/home/masaki/.vim/bundles/repos/github.com/Shougo/dein.vim')
 
-call neobundle#end()
+  " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('Shougo/neocomplcache.vim')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('Shougo/unite.vim')
+  call dein#add('scrooloose/syntastic')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('thinca/vim-quickrun')
+  call dein#add('kchmck/vim-coffee-script')
+  call dein#add('tpope/vim-endwise')
+  call dein#add('elzr/vim-json')
+  call dein#add('tpope/vim-rails')
+  call dein#add('AndrewRadev/switch.vim')
+  call dein#add('ConradIrwin/vim-bracketed-paste')
+  call dein#add('vim-scripts/taglist.vim')
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('chase/vim-ansible-yaml')
+  call dein#add('fatih/vim-go')
+  call dein#add('tpope/vim-commentary')
+  call dein#add('bling/vim-airline')
+	call dein#add('mrkn/vim-cruby')
+	call dein#add('szw/vim-tags')
+	call dein#add('tpope/vim-fugitive')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
+
+"End dein Scripts-------------------------
 
 filetype plugin indent on
 
-NeoBundleCheck
 " }}}
 
 " Checking typo.
@@ -289,25 +290,6 @@ autocmd vimenter * if !argc() | NERDTree | endif
 " 表示・非表示切り替え
 nnoremap <silent><C-t> :NERDTreeToggle<CR>
 
-"let g:alpaca_tags#config = {
-"\    '_' : '-R --sort=yes',
-"\    'ruby': '--languages=+Ruby',
-"\    'c': '--languages=+c',
-"\ }
-"
-"augroup AlpacaTags
-"  autocmd!
-"  if exists(':AlpacaTags')
-"    autocmd BufWritePost Gemfile AlpacaTagsBundle
-"    autocmd BufEnter * AlpacaTagsSet
-"    autocmd BufWritePost * AlpacaTagsUpdate
-"  endif
-"augroup END
-
-"set tags=tags
-"let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
-""let Tlist_Show_One_File = 1 "現在編集中のソースのタグしか表示しない
-"let Tlist_Exit_OnlyWiindow = 1 "taglist が最後のウインドウなら vim を閉じる
-""let Tlist_Enable_Fold_Column = 1 " 折り畳み
-"let Tlist_WinWidth = 80
-"let Tlist_Use_Right_Window = 1 " 右側にtag listのウインドうを表示する
+" vim-tags
+let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
+let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"

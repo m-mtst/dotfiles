@@ -228,6 +228,6 @@ bindkey '^h' peco-select-history
 source ~/.antigen.zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen-bundle Tarrasch/zsh-b
+antigen-bundle Tarrasch/zsh-bd
 
 ls
