@@ -11,16 +11,16 @@ zstyle ':completion:history-words:*' remove-all-dups yes
 setopt listpacked #補完リストを詰めて表示
 setopt hist_ignore_all_dups # 既にヒストリにあるコマンド行は古い方を削除
 setopt auto_cd # cd入力いらず
-setopt auto_pushd # ディレクトリの一覧表示
+#setopt auto_pushd # ディレクトリの一覧表示
 setopt nolistbeep # 補完時にbeepしない
 setopt nonomatch
-#setopt correct
 setopt print_exit_value # 戻り値が0以外の場合終了コードを表示
 setopt auto_param_slash # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
+setopt mark_dirs
 setopt auto_param_keys # カッコの対応などを自動的に補完
 setopt list_types # 補完候補一覧でファイルの種別を識別マーク表示 (訳注:ls -F の記号)
 setopt magic_equal_subst # =以降も補完する(--prefix=/usrなど)
-setopt extended_history   # ヒストリに実行時間も保存する
+setopt extended_history # ヒストリに実行時間も保存する
 setopt rm_star_wait # 10 秒間反応しなくなり、頭を冷ます時間が与えられる
 typeset -U path # $PATHの重複排除
 
@@ -216,9 +216,20 @@ function peco-select-history() {
 zle -N peco-select-history
 bindkey '^h' peco-select-history
 
-source ~/.antigen.zsh
+source ~/.zplug/init.zsh
 
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen-bundle Tarrasch/zsh-bd
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/pip", from:oh-my-zsh
+zplug "zsh-users/zsh-syntax-highlighting"
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load --verbose
 
 ls

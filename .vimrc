@@ -1,4 +1,6 @@
 scriptencoding utf-8
+set encoding=utf-8
+set fileencoding=utf-8
 set nocompatible
 set number
 set cursorline " カーソル行強調
@@ -33,8 +35,6 @@ set t_Co=256                     " 256色
 set wildmenu                     " ファイル名補完
 set wildmode=list:longest        " マッチするものをリスト表示しつつ、共通する最長の部分まで補完
 set wildignore=.git,.svn,*.jpg,*.jpeg,*.bmp,*.gif,*.png,*.o,*.so,*.out,*.exe,*.dll,*.swp,*.bak,*.old,*.tmp,*.DS_Store
-set encoding=utf-8
-set fileencoding=utf-8
 set incsearch
 set hlsearch
 set splitbelow
@@ -282,26 +282,3 @@ let g:neocomplcache_force_overwrite_completefunc=1 " vim-railsの補完を上書
 let g:vim_json_syntax_conceal = 0 " vim-jsonでconcealをしない
 let g:vimfiler_as_default_explorer = 1 " :e . で VimFiler が起動するようになる
 let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに変更
-
-"let g:alpaca_tags#config = {
-"\    '_' : '-R --sort=yes',
-"\    'ruby': '--languages=+Ruby',
-"\    'c': '--languages=+c',
-"\ }
-"
-"augroup AlpacaTags
-"  autocmd!
-"  if exists(':AlpacaTags')
-"    autocmd BufWritePost Gemfile AlpacaTagsBundle
-"    autocmd BufEnter * AlpacaTagsSet
-"    autocmd BufWritePost * AlpacaTagsUpdate
-"  endif
-"augroup END
-
-"set tags=tags
-"let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
-""let Tlist_Show_One_File = 1 "現在編集中のソースのタグしか表示しない
-"let Tlist_Exit_OnlyWiindow = 1 "taglist が最後のウインドウなら vim を閉じる
-""let Tlist_Enable_Fold_Column = 1 " 折り畳み
-"let Tlist_WinWidth = 80
-"let Tlist_Use_Right_Window = 1 " 右側にtag listのウインドうを表示する
