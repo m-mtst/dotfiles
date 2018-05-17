@@ -6,7 +6,6 @@ set number
 set cursorline " カーソル行強調
 set clipboard=unnamed
 set includeexpr=''
-set pastetoggle=<F12>
 set autoindent
 set smartindent  " 新しい行を開始したときに、新しい行のインデントを現在行と同じ量にする。
 set tabstop=2
@@ -31,7 +30,6 @@ set showcmd                      " コマンドをステータス行に表示
 set ttyfast                      " 高速ターミナル接続を行う
 set lazyredraw
 set nrformats-=octal             " 先頭に0がある数字でも10進数とみなす
-set t_Co=256                     " 256色
 set wildmenu                     " ファイル名補完
 set wildmode=list:longest        " マッチするものをリスト表示しつつ、共通する最長の部分まで補完
 set wildignore=.git,.svn,*.jpg,*.jpeg,*.bmp,*.gif,*.png,*.o,*.so,*.out,*.exe,*.dll,*.swp,*.bak,*.old,*.tmp,*.DS_Store
@@ -54,10 +52,10 @@ colorscheme hybrid
 
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab textwidth=80 colorcolumn=80
 au FileType python setl shiftwidth=4 softtabstop=4 textwidth=80 colorcolumn=80
-au FileType ruby setl iskeyword+=? " ?を含む識別子もひと続きで扱えるように
+au FileType ruby setl ts=2 shiftwidth=2 softtabstop=2 expandtab iskeyword+=? " ?を含む識別子もひと続きで扱えるように
 au FileType ansible setl shiftwidth=2 softtabstop=2
 au BufNewFile,BufRead Rakefile,Capfile,Berksfile,config.ru setf ruby
-au BufNewFile,BufRead insns.def,*.y setf c
+au BufNewFile,BufRead insns.def setf cruby
 au BufNewFile,BufRead *.template setf json
 au BufNewFile,BufRead *.yml setf ansible
 au BufRead,BufNewFile,BufReadPre *.coffee setf coffee
@@ -69,12 +67,10 @@ nnoremap :te :tabedit
 nnoremap :to :tabonly
 nnoremap :Q :tabonly<Bar>q
 nnoremap s :Switch<CR>
-nnoremap f :VimFilerSplit -simple -winwidth=35 -toggle -force-quit<CR>
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]> 
 nnoremap Y y$
-nnoremap + <C-a>
-nnoremap - <C-x>
+nnoremap - :split<CR>
 nnoremap <Bar> :vsplit<CR>
 nnoremap dd "_dd
 nmap # gcc
@@ -100,6 +96,11 @@ augroup BinaryXXD
   autocmd BufWritePre * if &binary | %!xxd -r | endif
   autocmd BufWritePost * if &binary | silent %!xxd -g 1
   autocmd BufWritePost * set nomod | endif
+augroup END
+
+augroup cruby
+  autocmd!
+  autocmd BufWinEnter,BufNewFile ~/download/ruby/**.[chy] setlocal filetype=cruby
 augroup END
 
 " <TAB>で補完
@@ -193,62 +194,66 @@ if has('conceal')
 endif
 " }}}
 
-" NeoBundle {{{
-" Note: Skip initialization for vim-tiny or vim-small.
-if !1 | finish | endif
-
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
-call neobundle#begin(expand('~/.vim/bundle/'))
+" Required:
+set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
 
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
+" Required:
+if dein#load_state('~/.vim/bundles')
+  call dein#begin('~/.vim/bundles')
 
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'elzr/vim-json'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'AndrewRadev/switch.vim'
-NeoBundle 'ConradIrwin/vim-bracketed-paste'
-NeoBundle 'vim-scripts/taglist.vim'
-NeoBundle 'leafgarland/typescript-vim'
-NeoBundle 'chase/vim-ansible-yaml'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-    \ 'windows' : 'make -f make_mingw32.mak',
-    \ 'cygwin' : 'make -f make_cygwin.mak',
-    \ 'mac' : 'make -f make_mac.mak',
-    \ 'unix' : 'make -f make_unix.mak',
-  \ },
-\ }
-"NeoBundleLazy 'alpaca-tc/alpaca_tags', {
-"              \ 'depends': ['Shougo/vimproc'],
-"              \ 'autoload' : {
-"              \   'commands' : [
-"              \     { 'name' : 'AlpacaTagsBundle', 'complete': 'customlist,alpaca_tags#complete_source' },
-"              \     { 'name' : 'AlpacaTagsUpdate', 'complete': 'customlist,alpaca_tags#complete_source' },
-"              \     'AlpacaTagsSet', 'AlpacaTagsCleanCache', 'AlpacaTagsEnable', 'AlpacaTagsDisable', 'AlpacaTagsKillProcess', 'AlpacaTagsProcessStatus',
-"              \ ],
-"              \ }}
+  " Let dein manage dein
+  " Required:
+  call dein#add('~/.vim/bundles/repos/github.com/Shougo/dein.vim')
 
-call neobundle#end()
+  " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('Shougo/neocomplcache.vim')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('Shougo/unite.vim')
+  call dein#add('scrooloose/syntastic')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('thinca/vim-quickrun')
+  call dein#add('kchmck/vim-coffee-script')
+  call dein#add('tpope/vim-endwise')
+  call dein#add('elzr/vim-json')
+  call dein#add('tpope/vim-rails')
+  call dein#add('AndrewRadev/switch.vim')
+  call dein#add('ConradIrwin/vim-bracketed-paste')
+  call dein#add('vim-scripts/taglist.vim')
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('chase/vim-ansible-yaml')
+  call dein#add('fatih/vim-go')
+  call dein#add('tpope/vim-commentary')
+  call dein#add('bling/vim-airline')
+	call dein#add('mrkn/vim-cruby')
+	call dein#add('szw/vim-tags')
+	call dein#add('tpope/vim-fugitive')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
 
 filetype plugin indent on
 
-NeoBundleCheck
 " }}}
 
 " Checking typo.
@@ -264,10 +269,6 @@ endfunction
 
 let g:syntastic_mode_map = { 'passive_filetypes': ['c'] }
 
-let g:changelog_timeformat = "%a %b %e %T %Y"
-"let g:changelog_username = system("git config -z user.name") . " <" . system("git config -z user.email") . ">"
-let g:changelog_username = "Masaki Matsushita <glass.saga@gmail.com>"
-
 " neocomplcache {{{
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_quick_match = 0
@@ -280,5 +281,18 @@ let g:neocomplcache_force_overwrite_completefunc=1 " vim-railsの補完を上書
 " }}}
 
 let g:vim_json_syntax_conceal = 0 " vim-jsonでconcealをしない
+
 let g:vimfiler_as_default_explorer = 1 " :e . で VimFiler が起動するようになる
 let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに変更
+
+let NERDTreeShowHidden=1
+" ブックマークを表示 (1:表示)
+let g:NERDTreeShowBookmarks=1
+" 引数なしで起動した場合、NERDTreeを開く
+autocmd vimenter * if !argc() | NERDTree | endif
+" 表示・非表示切り替え
+nnoremap <silent><C-t> :NERDTreeToggle<CR>
+
+" vim-tags
+let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
+let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
