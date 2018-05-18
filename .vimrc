@@ -73,7 +73,6 @@ nnoremap Y y$
 nnoremap - :split<CR>
 nnoremap <Bar> :vsplit<CR>
 nnoremap dd "_dd
-nmap # gcc
 nmap n nzz " 検索語が画面の真ん中に来るようにする
 
 " 全角スペースの表示
