@@ -16,4 +16,5 @@ path=(
   $HOME/ruby_trunk/bin(N-/)
   $HOME/bin(N-/)
   $HOME/.yarn/bin(N-/)
+  $HOME/arcanist/arcanist/bin(N-/)
 )

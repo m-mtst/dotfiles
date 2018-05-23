@@ -90,8 +90,9 @@ alias gc="git checkout"
 alias gb="git branch"
 alias gd="git diff"
 alias gwd"git diff --word-diff"
-alias gdt="gd trunk"
+alias gdd="gd develop"
 alias gdm="gd master"
+alias gdt="gd trunk"
 alias gl="git log"
 alias glp="git log -p"
 alias gp="git pull --rebase"
@@ -218,8 +219,6 @@ bindkey '^h' peco-select-history
 
 source ~/.zplug/init.zsh
 
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/pip", from:oh-my-zsh
 zplug "zsh-users/zsh-syntax-highlighting"
 
 # Install plugins if there are plugins that have not been installed
@@ -230,6 +229,6 @@ if ! zplug check --verbose; then
     fi
 fi
 
-zplug load --verbose
+zplug load
 
 ls
