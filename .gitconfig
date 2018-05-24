@@ -4,6 +4,10 @@
 	signingkey = 94F1F2D8
 [color]
 	ui = true
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
@@ -17,3 +21,5 @@
 	rebase = rebase --whitespace=warn
   co = commit
 	rh = reset --hard
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all

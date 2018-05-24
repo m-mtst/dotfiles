@@ -219,7 +219,7 @@ bindkey '^h' peco-select-history
 
 source ~/.zplug/init.zsh
 
-zplug "zsh-users/zsh-syntax-highlighting"
+#zplug "zsh-users/zsh-syntax-highlighting"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
