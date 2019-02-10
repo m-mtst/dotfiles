@@ -217,18 +217,27 @@ function peco-select-history() {
 zle -N peco-select-history
 bindkey '^h' peco-select-history
 
-source ~/.zplug/init.zsh
-
-#zplug "zsh-users/zsh-syntax-highlighting"
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+# kubernetes
+if which kubectl > /dev/null 2>&1; then
+  source <(kubectl completion zsh)
 fi
 
-zplug load
+# source ~/.zplug/init.zsh
+
+# # Install plugins if there are plugins that have not been installed
+# if ! zplug check; then
+#     printf "Install? [y/N]: "
+#     if read -q; then
+#         echo; zplug install
+#     fi
+# fi
+
+# zplug load
 
 ls
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/masaki/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/masaki/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/masaki/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/masaki/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
