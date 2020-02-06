@@ -5,3 +5,5 @@ if true; then
       test -z "$TMUX" && (tmux -2 -u attach || tmux -2 -u new-session)
   fi
 fi
+
+export PATH="$HOME/.cargo/bin:$PATH"

@@ -172,12 +172,26 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_mode_map = { 'passive_filetypes': ['c'] }
+let g:syntastic_mode_map = { 'passive_filetypes': ['c', 'python', 'cpp'] }
 let g:syntastic_c_checkers = ['gcc']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:quickrun_config = {}
+let g:quickrun_config['python'] = { 'command': 'python3' }
+let g:syntastic_python_flake8_exec = 'python3'
+
+if executable("clang++")
+  let g:syntastic_cpp_compiler = 'clang++'
+  let g:syntastic_cpp_compiler_options = '--std=c++17 --stdlib=libc++'
+  let g:quickrun_config['cpp/clang++17'] = {
+      \ 'cmdopt': '--std=c++17 --stdlib=libc++',
+      \ 'type': 'cpp/clang++'
+    \ }
+  let g:quickrun_config['cpp'] = {'type': 'cpp/clang++17'}
+endif
 
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_quick_match = 0

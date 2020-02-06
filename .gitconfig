@@ -17,8 +17,7 @@
 [push]
 	default = current
 [alias]
-	apply = apply --whitespace=warn
-	rebase = rebase --whitespace=warn
+	gr = grep -n
   co = commit
 	rh = reset --hard
   lol = log --graph --decorate --pretty=oneline --abbrev-commit

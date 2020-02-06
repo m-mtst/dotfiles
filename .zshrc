@@ -72,11 +72,15 @@ fi
 alias ll="ls -l"
 alias lhl="ls -hl"
 alias df="df -Th"
+alias sl=ls
+alias py="python"
+alias py3="python3"
+
 alias r=ruby
 alias p=python
-alias sl=ls
-alias be="bundle exec"
-alias py="python"
+alias k=kubectl
+alias kc=kubectx
+alias kn=kubens
 
 # typo
 alias eixt="exit"
@@ -89,22 +93,14 @@ alias gs="git status"
 alias gc="git checkout"
 alias gb="git branch"
 alias gd="git diff"
-alias gwd"git diff --word-diff"
-alias gdd="gd develop"
 alias gdm="gd master"
-alias gdt="gd trunk"
 alias gl="git log"
-alias glp="git log -p"
 alias gp="git pull --rebase"
 alias gr="git remote -v"
 
-alias -s txt=cat
-alias -s rb=ruby
-alias -s pl=perl
-alias -s py=python
-alias -s yml=vim
 alias -s git="git clone"
-alias -s go="go run"
+
+alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
 
 if which apt-get > /dev/null 2>&1; then
   alias diff="colordiff -u" # unified format
@@ -241,3 +237,4 @@ if [ -f '/Users/masaki/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/User
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/masaki/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/masaki/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+alias cerbero='~/gstreamer/cerbero/cerbero-uninstalled'
