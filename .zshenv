@@ -9,11 +9,14 @@ export GOROOT=/usr/local/go
 export GOPATH=$HOME/gopkg
 export GOOGLE_APPLICATION_CREDENTIALS=$HOME/m-pipe/gcp-key.json
 export CLOUDSDK_PYTHON=python3
+export DOCKER_HOST="ssh://misc"
+export PKG_CONFIG_PATH="/Library/Frameworks/GStreamer.framework/Versions/1.0/lib/pkgconfig"
 
 path=(
   /usr/local/go/bin(N-/)
   /usr/local/opt/libpq/bin(N-/)
   /usr/local/opt/curl/bin(N-/)
+  /Library/Frameworks/GStreamer.framework/Commands(N-/)
   $GOROOT/bin(N-/)
   $GOPATH/bin(N-/)
   $HOME/.gem/ruby/2.7.0/bin(N-/)
