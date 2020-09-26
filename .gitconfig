@@ -17,8 +17,4 @@
 [push]
 	default = current
 [alias]
-	gr = grep -n
   co = commit
-	rh = reset --hard
-  lol = log --graph --decorate --pretty=oneline --abbrev-commit
-  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
