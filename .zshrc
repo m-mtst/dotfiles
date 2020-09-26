@@ -63,7 +63,6 @@ alias tn="tmux new -s"
 alias ta="tmux a -d -t"
 alias vim="vim -p"
 alias vi="vim"
-alias v="vi"
 if [ `uname` = "Darwin" ]; then
   alias ls="gls --color=auto"
 else
@@ -74,10 +73,7 @@ alias lhl="ls -hl"
 alias df="df -Th"
 alias sl=ls
 alias py="python"
-alias py3="python3"
 
-alias r=ruby
-alias p=python
 alias k=kubectl
 alias kc=kubectx
 alias kn=kubens
@@ -100,31 +96,8 @@ alias gr="git remote -v"
 
 alias -s git="git clone"
 
-alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
-
-if which apt-get > /dev/null 2>&1; then
-  alias diff="colordiff -u" # unified format
-else
-  alias diff="diff -u" # unified format
-fi 
-
-if which pygmentize > /dev/null 2>&1; then
-  alias ccat='pygmentize -O style=vim -f console256 -g' # colorized cat
-fi
-
-if which apt-get > /dev/null 2>&1; then
-  alias as="apt-cache search"
-  alias ai="sudo apt-get install"
-  alias ar="sudo apt-get autoremove"
-  alias au="sudo apt-get update && sudo apt-get dist-upgrade && ar -y"
-fi
-
-if which htop > /dev/null 2>&1; then
-  alias top="htop"
-fi
-
-if which bundle > /dev/null 2>&1; then
-  alias jbundle="jruby -S bundle"
+if [[ `uname` = "Darwin" ]]; then
+  alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
 fi
 
 if which jwhois > /dev/null 2>&1; then
@@ -134,31 +107,25 @@ if which jwhois > /dev/null 2>&1; then
   }
 fi
 
-# Gitのルートディレクトリへ簡単に移動できるようにする関数
-# http://qiita.com/ponko2@github/items/d5f45b2cf2326100cdbc
-function root() {
-  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-    cd `pwd`/`git rev-parse --show-cdup`
-  fi
-}
-
 function we() {
   wget $1
   tar -xvf $(basename $1)
 }
 
-# crontabの-eを禁止, -rは確認を強制
-function crontab() {
-  if [[ $1 = -e ]]; then
-    echo "\"crontab -e\" is dangerous and strictly prohibited."
-    echo "Use \"crontab file\"."
-    return 1
-  elif [[ $1 = -r ]]; then
-    command crontab -ri
-  else
-    command crontab $@
-  fi
-}
+if [[ `uname` != "Darwin" ]]; then
+  # crontabの-eを禁止, -rは確認を強制
+  function crontab() {
+    if [[ $1 = -e ]]; then
+      echo "\"crontab -e\" is dangerous and strictly prohibited."
+      echo "Use \"crontab file\"."
+      return 1
+    elif [[ $1 = -r ]]; then
+      command crontab -ri
+    else
+      command crontab $@
+    fi
+  }
+fi
 
 if [[ -f ~/.tmuxinator/tmuxinator.zsh ]]; then
   source ~/.tmuxinator/tmuxinator.zsh
@@ -183,14 +150,8 @@ if [[ `uname` != "Darwin" ]]; then
   fi
 fi
 
-if [[ `uname` = "Darwin" ]]; then
-  if [[ -e "$HOME/Downloads/dircolors-solarized" ]]; then
-    eval $(gdircolors $HOME/Downloads/dircolors-solarized/dircolors.ansi-universal)
-  fi
-else
-  if [[ -e "$HOME/download/dircolors-solarized" ]]; then
-    eval $(dircolors $HOME/download/dircolors-solarized/dircolors.ansi-universal)
-  fi
+if [[ -e "$HOME/download/dircolors-solarized" ]]; then
+  eval $(dircolors $HOME/download/dircolors-solarized/dircolors.ansi-universal)
 fi
 
 if [[ -n "$LS_COLORS" ]]; then
@@ -218,23 +179,10 @@ if which kubectl > /dev/null 2>&1; then
   source <(kubectl completion zsh)
 fi
 
-# source ~/.zplug/init.zsh
-
-# # Install plugins if there are plugins that have not been installed
-# if ! zplug check; then
-#     printf "Install? [y/N]: "
-#     if read -q; then
-#         echo; zplug install
-#     fi
-# fi
-
-# zplug load
-
 ls
-alias cerbero='~/gstreamer/cerbero/cerbero-uninstalled'
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/masaki/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/masaki/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$HOME/download/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/download/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/masaki/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/masaki/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/download/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/download/google-cloud-sdk/completion.zsh.inc"; fi

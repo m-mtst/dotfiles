@@ -51,7 +51,6 @@ au BufNewFile,BufRead Rakefile,Capfile,Berksfile,config.ru setf ruby
 au BufNewFile,BufRead insns.def setf c
 au BufNewFile,BufRead *.template setf json
 au BufNewFile,BufRead *.yml setf ansible
-au BufRead,BufNewFile,BufReadPre *.coffee setf coffee
 
 noremap <Tab><Right> :tabnext<CR>
 noremap <Tab><Left> :tabprevious<CR>
@@ -101,7 +100,7 @@ augroup END
 
 augroup cruby
   autocmd!
-  autocmd BufWinEnter,BufNewFile ~/Downloads/ruby/**.c setfiletype cruby
+  autocmd BufWinEnter,BufNewFile ~/download/ruby/**.c setfiletype cruby
 augroup END
 
 imap  <expr><TAB>
