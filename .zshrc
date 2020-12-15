@@ -13,7 +13,7 @@ setopt hist_ignore_all_dups # 既にヒストリにあるコマンド行は古�
 setopt auto_cd # cd入力いらず
 #setopt auto_pushd # ディレクトリの一覧表示
 setopt nolistbeep # 補完時にbeepしない
-setopt nonomatch
+setopt +o nomatch
 setopt print_exit_value # 戻り値が0以外の場合終了コードを表示
 setopt auto_param_slash # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
 setopt mark_dirs

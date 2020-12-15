@@ -36,6 +36,7 @@ set display=lastline " 長い行を表示
 set showmatch " 対応する括弧に一瞬カーソルを飛ばす
 set matchtime=1 " カーソルを飛ばす時間(0.1秒)
 set termguicolors
+set shell=bash
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
