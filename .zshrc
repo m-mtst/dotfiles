@@ -108,9 +108,12 @@ if which jwhois > /dev/null 2>&1; then
 fi
 
 function we() {
-  wget $1
-  tar -xvf $(basename $1)
+  curl $1 | tar -xvC .
 }
+# function we() {
+#   wget $1
+#   tar -xvf $(basename $1)
+# }
 
 if [[ `uname` != "Darwin" ]]; then
   # crontabの-eを禁止, -rは確認を強制

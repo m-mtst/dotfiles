@@ -1,5 +1,5 @@
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
-export GEM_HOME="$HOME/.gem/ruby/2.7.0"
+export GEM_HOME="$HOME/.gem/ruby/3.0.0"
 export LANG="ja_JP.UTF-8"
 export LC_ALL=$LANG
 export LC_CTYPE=$LANG
@@ -22,7 +22,7 @@ path=(
   /Library/Frameworks/GStreamer.framework/Commands(N-/)
   $GOROOT/bin(N-/)
   $GOPATH/bin(N-/)
-  $HOME/.gem/ruby/2.7.0/bin(N-/)
+  $HOME/.gem/ruby/3.0.0/bin(N-/)
   $HOME/.cargo/bin(N-/)
   $path
   $HOME/ruby_trunk/bin(N-/)

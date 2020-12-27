@@ -153,6 +153,7 @@ if dein#load_state('~/.vim/bundles')
 	call dein#add('mrkn/vim-cruby')
 	call dein#add('tpope/vim-fugitive')
 	call dein#add('szw/vim-tags')
+	call dein#add('editorconfig/editorconfig-vim')
 
   " Required:
   call dein#end()
@@ -203,6 +204,7 @@ let g:neocomplcache_manual_completion_start_length = 2
 let g:neocomplcache_force_overwrite_completefunc=1 " vim-railsの補完を上書き
 
 let g:vim_json_syntax_conceal = 0 " vim-jsonでconcealをしない
+let g:vim_json_warnings=0
 
 let g:vimfiler_as_default_explorer = 1 " :e . で VimFiler が起動するようになる
 let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに変更
