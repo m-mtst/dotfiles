@@ -170,7 +170,7 @@ endif
 filetype plugin indent on
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_mode_map = { 'passive_filetypes': ['c', 'python', 'cpp'] }
