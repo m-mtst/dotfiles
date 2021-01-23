@@ -19,6 +19,7 @@ path=(
   /usr/local/go/bin(N-/)
   /usr/local/opt/libpq/bin(N-/)
   /usr/local/opt/curl/bin(N-/)
+  /snap/bin(N-/)
   /Library/Frameworks/GStreamer.framework/Commands(N-/)
   $GOROOT/bin(N-/)
   $GOPATH/bin(N-/)
