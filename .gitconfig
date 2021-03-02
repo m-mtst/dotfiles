@@ -18,3 +18,5 @@
 	default = current
 [alias]
   co = commit
+[init]
+	defaultBranch = main

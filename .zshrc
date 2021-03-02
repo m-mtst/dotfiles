@@ -89,7 +89,7 @@ alias gs="git status"
 alias gc="git checkout"
 alias gb="git branch"
 alias gd="git diff"
-alias gdm="gd master"
+alias gdm="gd main"
 alias gl="git log"
 alias gp="git pull --rebase"
 alias gr="git remote -v"
@@ -189,3 +189,4 @@ if [ -f "$HOME/download/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/download
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/download/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/download/google-cloud-sdk/completion.zsh.inc"; fi
+#source /usr/local/bin/activate.sh
