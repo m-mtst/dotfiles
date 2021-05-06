@@ -1,7 +1,9 @@
 scriptencoding utf-8
 set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
-set nocompatible
+if &compatible
+  set nocompatible
+endif
 set cursorline " カーソル行強調
 set clipboard=unnamed
 set cindent
@@ -41,7 +43,6 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 syntax enable
-
 colorscheme tender
 let g:airline_theme = 'tender'
 
@@ -104,19 +105,10 @@ augroup cruby
   autocmd BufWinEnter,BufNewFile ~/download/ruby/**.c setfiletype cruby
 augroup END
 
-imap  <expr><TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-
 " For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
-
-" let g:neosnippet#snippets_directory='~/.vim/bundles/repos/github.com/Shougo/neosnippet-snippets/neosnippets,~/.vim/snippets'
 
 " Required:
 set runtimepath+=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
@@ -129,14 +121,14 @@ call dein#begin('~/.config/nvim/dein')
 call dein#add('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
 
 " Add or remove your plugins here:
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
+call dein#add('Shougo/deoppet.nvim')
 call dein#add('Shougo/deoplete.nvim')
-call dein#add('Shougo/unite.vim')
+call dein#add('prabirshrestha/vim-lsp')
+call dein#add('lighttiger2505/deoplete-vim-lsp')
+" call dein#add('Shougo/unite.vim')
 call dein#add('vim-syntastic/syntastic')
-call dein#add('scrooloose/nerdtree')
+call dein#add('preservim/nerdtree')
 call dein#add('thinca/vim-quickrun')
-call dein#add('kchmck/vim-coffee-script')
 call dein#add('tpope/vim-endwise')
 call dein#add('elzr/vim-json')
 call dein#add('tpope/vim-rails')
@@ -150,17 +142,15 @@ call dein#add('tpope/vim-commentary')
 call dein#add('bling/vim-airline')
 call dein#add('jacoborus/tender.vim')
 call dein#add('mrkn/vim-cruby')
-call dein#add('tpope/vim-fugitive')
 call dein#add('szw/vim-tags')
 call dein#add('editorconfig/editorconfig-vim')
 
 " Required:
 call dein#end()
-call dein#save_state()
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
-  call dein#install()
+ call dein#install()
 endif
 
 "End dein Scripts-------------------------
@@ -192,20 +182,16 @@ if executable("clang++")
   let g:quickrun_config['cpp'] = {'type': 'cpp/clang++17'}
 endif
 
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_quick_match = 0
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_enable_info = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_manual_completion_start_length = 2
-let g:neocomplcache_force_overwrite_completefunc=1 " vim-railsの補完を上書き
-
 let g:vim_json_syntax_conceal = 0 " vim-jsonでconcealをしない
 let g:vim_json_warnings=0
 
-let g:vimfiler_as_default_explorer = 1 " :e . で VimFiler が起動するようになる
-let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに変更
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+        \ neosnippet#expandable_or_jumpable() ?
+        \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+
+" let g:vimfiler_as_default_explorer = 1 " :e . で VimFiler が起動するようになる
+" let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに変更
 
 let NERDTreeShowHidden=1
 " ブックマークを表示 (1:表示)
