@@ -5,6 +5,7 @@ cookbooks
 .gem
 tags
 TAGS
+.config/nvim/dein
 
 *-*-*.def
 *-*-*.exp
