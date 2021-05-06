@@ -61,8 +61,8 @@ alias tmux="tmux -2 -u"
 alias tl="tmux ls"
 alias tn="tmux new -s"
 alias ta="tmux a -d -t"
-alias vim="vim -p"
-alias vi="vim"
+alias vim="nvim -p"
+alias vi="nvim"
 if [ `uname` = "Darwin" ]; then
   alias ls="gls --color=auto"
 else
