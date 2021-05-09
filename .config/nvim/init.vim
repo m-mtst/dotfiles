@@ -121,8 +121,11 @@ call dein#begin('~/.config/nvim/dein')
 call dein#add('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
 
 " Add or remove your plugins here:
-call dein#add('Shougo/deoppet.nvim')
+" call dein#add('Shougo/deoppet.nvim')
 call dein#add('Shougo/deoplete.nvim')
+call dein#add('Shougo/neosnippet.vim')
+call dein#add('Shougo/neosnippet-snippets')
+call dein#add('Shougo/.vim')
 call dein#add('prabirshrestha/vim-lsp')
 call dein#add('lighttiger2505/deoplete-vim-lsp')
 " call dein#add('Shougo/unite.vim')
