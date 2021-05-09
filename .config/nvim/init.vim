@@ -121,14 +121,11 @@ call dein#begin('~/.config/nvim/dein')
 call dein#add('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
 
 " Add or remove your plugins here:
-" call dein#add('Shougo/deoppet.nvim')
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
-call dein#add('Shougo/.vim')
 call dein#add('prabirshrestha/vim-lsp')
 call dein#add('lighttiger2505/deoplete-vim-lsp')
-" call dein#add('Shougo/unite.vim')
 call dein#add('vim-syntastic/syntastic')
 call dein#add('preservim/nerdtree')
 call dein#add('thinca/vim-quickrun')
@@ -193,8 +190,8 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" :
         \ neosnippet#expandable_or_jumpable() ?
         \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 
-" let g:vimfiler_as_default_explorer = 1 " :e . で VimFiler が起動するようになる
-" let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに変更
+let g:vimfiler_as_default_explorer = 1 " :e . で VimFiler が起動するようになる
+let g:vimfiler_edit_action = 'tabopen' " Vim:Vimfilerのedit actionをtabopenに変更
 
 let NERDTreeShowHidden=1
 " ブックマークを表示 (1:表示)
