@@ -21,6 +21,7 @@ path=(
   /usr/local/opt/curl/bin(N-/)
   /snap/bin(N-/)
   /Library/Frameworks/GStreamer.framework/Commands(N-/)
+  $HOME/.local/bin(N-/)
   $GOROOT/bin(N-/)
   $GOPATH/bin(N-/)
   $HOME/.gem/ruby/3.0.0/bin(N-/)
