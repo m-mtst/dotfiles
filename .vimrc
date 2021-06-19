@@ -42,8 +42,8 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 syntax enable
 
-colorscheme tender
-let g:airline_theme = 'tender'
+"colorscheme tender
+"let g:airline_theme = 'tender'
 
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 colorcolumn=80
 au FileType python setl shiftwidth=4 softtabstop=4 colorcolumn=80
@@ -119,7 +119,7 @@ endif
 " let g:neosnippet#snippets_directory='~/.vim/bundles/repos/github.com/Shougo/neosnippet-snippets/neosnippets,~/.vim/snippets'
 
 " Required:
-set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim,~/.vim/bundles/repos/github.com/jacoborus/tender.vim
 
 " Required:
 if dein#load_state('~/.vim/bundles')

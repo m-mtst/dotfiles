@@ -43,8 +43,6 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 syntax enable
-colorscheme tender
-let g:airline_theme = 'tender'
 
 au FileType c setl tabstop=8 shiftwidth=4 softtabstop=4 colorcolumn=80
 au FileType python setl shiftwidth=4 softtabstop=4 colorcolumn=80
@@ -111,7 +109,7 @@ if has('conceal')
 endif
 
 " Required:
-set runtimepath+=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim,~/.config/nvim/dein/repos/github.com/jacoborus/tender.vim
 
 " Required:
 call dein#begin('~/.config/nvim/dein')
@@ -154,6 +152,9 @@ if dein#check_install()
 endif
 
 "End dein Scripts-------------------------
+"
+colorscheme tender
+let g:airline_theme = 'tender'
 
 filetype plugin indent on
 
